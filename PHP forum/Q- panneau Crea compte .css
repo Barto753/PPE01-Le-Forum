@@ -1,0 +1,59 @@
+body, html
+{
+    height: 100%;
+    margin: 0;
+}
+
+.container_page
+{
+	height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.container_center
+{
+	border-radius: 4px 4px 0 0;
+    border: #aaa solid 1px;
+    padding: 1.5em;
+    background: #eee;
+    box-shadow: 1px 1px 2px #fff inset;
+    
+    display: flex;
+    flex-direction: column;
+}
+
+label 
+{
+	margin-top: 1rem;
+	display: inline-block;
+	width: 120px;
+	font-family: sans-serif;
+	font-weight: 700;
+	font-size: 15px;
+	color: #636363;
+}
+
+.button_connexion
+{
+	margin-top: 30px;
+    border: 1px solid #aaa;
+    padding: 5px;
+    color: #111;
+    text-decoration: none;
+    background: #ddd;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.button_connexion:hover
+{
+    background: #bfbfbf;
+}
+
+.input_login, .input_password
+{
+	height: 22px;
+}

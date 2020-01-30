@@ -1,15 +1,9 @@
-<?php
 
-
-
-?>
-
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="fr">
 	<head>
 		<meta charset="utf-8" />
-		<title>Forum </title>
-        <link rel="icon" type="image/png" href="img/admin.png" />
-        <link rel="stylesheet" type="text/css" href="css/general.css" media="all"/>
+		<title> Creation de compte </title>
+        <link rel="stylesheet" type="text/css" href="ful panneau.css" media="all"/>
 	</head>
-	<body>
+	
