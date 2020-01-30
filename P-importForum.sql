@@ -4,17 +4,24 @@ CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE bdd_forum;
 
 CREATE TABLE Utilisateur(
-idUser INT, 
-prenom VARCHAR(64), 
-pseudo VARCHAR(64), 
-dateNaissance DATE, 
-mail VARCHAR(64),
-avatar VARCHAR(64), 
+idUser INT AUTO_INCREMENT,  
+pseudo VARCHAR(64),  
+email VARCHAR(64),
+cheminAvatar VARCHAR(64), 
 password VARCHAR(64),
-bannissement TINYINT,
-connexion TINYINT,
 isAdmin TINYINT,
+isConnected TINYINT,
 PRIMARY KEY(idUser));
+
+CREATE TABLE Bannissement_Utilisateur
+
+
+CREATE TABLE Bannissement(
+idBannissement INT,
+typeBannissement VARCHAR(64),
+dateDebut DATE,
+dateFin DATE,
+PRIMARY KEY(idBannissement));
 
 CREATE TABLE Message(
 idMessage INT,
@@ -25,14 +32,17 @@ PRIMARY KEY(idMessage));
 
 CREATE TABLE Discussion(
 idDiscussion INT,
-nomDiscussion VARCHAR(64),
+titreDiscussion VARCHAR(64),
+isBloque TINYINT,
 idSujet INT,
 PRIMARY KEY(idDiscussion));
 
-CREATE TABLE SujetDiscussion(
-idSujet INT,
-nomSujet VARCHAR(64),
-PRIMARY KEY(idSujet));
+CREATE TABLE CategorieDiscussion(
+idCategorie INT,
+nomCategorie VARCHAR(64),
+PRIMARY KEY(idCategorie));
+
+
 
 ALTER TABLE Message
 ADD CONSTRAINT Message_idUser
