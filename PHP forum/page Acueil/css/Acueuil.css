@@ -1,0 +1,57 @@
+body, html
+{
+    height: 100%;
+    margin: 0;
+    font-size: 17px;
+}
+
+.div_connexion
+{
+    width: 100%;
+    height: 200px;
+}
+
+.barre_navigation
+{
+    background-color: aqua ;
+    display: inline-flex;
+    width: 100% ;
+    height: 80px ;
+    margin-bottom:20px ;
+}
+
+.button_connexion
+{
+    width: 150px ;
+    height: 40px ;
+    margin-top: 20px;
+    margin-left: 1000px;
+}
+.button_creation
+{
+    width: 150px ;
+    height: 40px ;
+    margin-top: 20px;
+    margin-left: 80px;
+}
+
+.header
+{
+    width: 100%;
+    height: 200px;
+    background-color: blue ;
+    display: inline-flex;
+}
+
+.Acueil-logo
+{
+    width: 200px ;
+    height: 200px ;
+}
+
+.accueil-titre
+{
+    font-size: 70px;
+    margin-left: 300px;
+    
+}
