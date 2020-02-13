@@ -4,54 +4,135 @@ body, html
     margin: 0;
     font-size: 17px;
 }
-
 .div_connexion
 {
     width: 100%;
     height: 200px;
 }
 
-.barre_navigation
+.barre_entete
 {
-    background-color: aqua ;
+    background-color: #17D7DC ;
     display: inline-flex;
     width: 100% ;
-    height: 80px ;
+    height: 50px ;
     margin-bottom:20px ;
 }
-
 .button_connexion
 {
-    width: 150px ;
-    height: 40px ;
-    margin-top: 20px;
-    margin-left: 1000px;
+    width: 130px ;
+    height: 30px ;
+    margin-top: 10px;
+    margin-left: 1100px;
 }
 .button_creation
 {
-    width: 150px ;
-    height: 40px ;
-    margin-top: 20px;
-    margin-left: 80px;
+    width: 130px ;
+    height: 30px ;
+    margin-top: 10px;
+    margin-left: 25px;
 }
 
 .header
 {
     width: 100%;
-    height: 200px;
-    background-color: blue ;
+    height: 120px;
+    background-color: #2078D7 ;
     display: inline-flex;
 }
-
-.Acueil-logo
+.Acueil_logo
 {
-    width: 200px ;
-    height: 200px ;
+    width: 400px ;
+    height: 120px ;
+}
+.accueil_titre
+{
+    font-size: 50px;
+    margin-left: 300px;
 }
 
-.accueil-titre
+.barre_navigation
 {
-    font-size: 70px;
-    margin-left: 300px;
-    
+    background-color: #2078D7 ;
+    display: inline-flex;
+    margin-left: 50px;
+    margin-top: 20PX;
+    width: 1400px ;
+    height: 34px ;
+    margin-bottom:20px ;
+}
+.button_Menu
+{
+    width: 100px ;
+    height: 30px ;
+    margin-left: 5px;
+    margin-top: 2px;
+    background-color: #17D7DC
+}
+.button_firstPage
+{
+    width: 100px ;
+    height: 30px ;
+    margin-left: 5px;
+    margin-top: 2px;
+    background-color: #17D7DC
+}
+.button_ThirdPage
+{
+    width: 100px ;
+    height: 30px ;
+    margin-left: 5px;
+    margin-top: 2px;
+    background-color: #17D7DC
+}
+
+
+
+.forum_general
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}   
+
+.favoris
+{
+    width: 200px ;
+    height: 400px ;
+    margin-left: 50px;
+    margin-top: 50px;
+    background-color: #17D7DC  ;
+}
+.titre_barre
+{
+    font-size: 30px;
+    margin-left: 30px;
+}
+
+.discussion
+{
+    width: 900px ;
+    height: 800px ;
+    margin-left: 100px;
+    margin-top: 30px;
+    background-color: #2078D7  ;    
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+.entete_discussion
+{
+    margin-left: 30px;
+    margin-top: 20px;
+    width: 500px ;
+    height: 60px ;
+}
+.discussion_titre
+{
+    font-size: 34px;
+}
+.button_creaDiscution
+{
+    font-size: 50px;
+    width: 60px ;
+    height: 60px ;
 }
