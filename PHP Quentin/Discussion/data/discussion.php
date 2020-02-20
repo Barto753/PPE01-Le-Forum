@@ -3,7 +3,7 @@
     class Discussion
     {
         private $idDiscussion;
-        private $titreDiscution;
+        private $titreDiscussion ;
         private $texteDiscussion;
         private $datePublicationDiscussion ;
         private $idClosed;
@@ -16,11 +16,11 @@
             $this->idDiscussion = $idDiscussion;
         }
 
-        function getTitreDiscution() {
-            return $this->titreDiscution;
+        function getTitreDiscussion() {
+            return $this->titreDiscussion;
         }
-        function setTitreDiscution($titreDiscution) {
-            $this->titreDiscution = $titreDiscution;
+        function setTitreDiscussion($titreDiscussion) {
+            $this->titreDiscussion = $titreDiscussion;
         }
 
         function getTexteDiscussion() {
@@ -33,7 +33,7 @@
         function getDatePublicationDiscussionn() {
             return $this->datePublicationDiscussion;
         }
-        function setDatePublicationDiscussion($dateParution) {
+        function setDatePublicationDiscussion($datePublicationDiscussion) {
             $this->datePublicationDiscussion = $datePublicationDiscussion;
         }
 

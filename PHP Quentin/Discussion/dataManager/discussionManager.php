@@ -1,22 +1,22 @@
 <?php
     include_once("dataManager/dataBaseLinker.php");
-    include_once("data/discution.php");
+    include_once("data/discussion.php");
 
-    class DiscutionManager
+    class DiscussionManager
     {
-        public static function insertDiscution($discution)
+        public static function insertDiscussion($discussion)
         {
             $connexionPdo = dataBaseLinker::getConnexion();
 
-            $state = $connexionPdo->prepare("INSERT INTO Discution(titreDiscution, texteDiscussion , datePublicationDiscussion, idClosed, idCategorie) VALUES( ? ,? ,?, ?, ? )");
+            $state = $connexionPdo->prepare("INSERT INTO Discussion(titreDiscussion, texteDiscussion , datePublicationDiscussion, idClosed, idCategorie) VALUES( ? ,? ,?, ?, ? )");
 
-            $titreDiscution = $discution->getTitreDiscution();
-            $texteDiscussion  = $discution->getTexteDiscussion ();
-            $dateParution = $discution->getDatePublicationDiscussion();
-            $idClosed = $discution->getIdClosed();
-            $idCategorie = $discution->getIdCategorie();
+            $titreDiscussion = $discussion->getTitreDiscussion();
+            $texteDiscussion  = $discussion->getTexteDiscussion ();
+            $dateParution = $discussion->getDatePublicationDiscussion();
+            $idClosed = $discussion->getIdClosed();
+            $idCategorie = $discussion->getIdCategorie();
 
-            $state->bindParam(1 ,$titreDiscution);
+            $state->bindParam(1 ,$titreDiscussion);
             $state->bindParam(2 ,$texteDiscussion);
             $state->bindParam(3 ,$datePublicationDiscussion);
             $state->bindParam(4 ,$idClosed);
@@ -24,31 +24,31 @@
             $state->execute();
         }
 
-        public static function findDiscution($idDiscution)
+        public static function findDiscution($idDiscussion)
         {
-            $discution = null;
-            $discuTab = new Discution();
+            $disussion = null;
+            $discuTab = new Discussion();
             $discuTab = array();
 
             $connexionPdo = dataBaseLinker::getConnexion();
 
-            $state = $connexionPdo->prepare("SELECT * FROM Discution WHERE idDiscution = ? ")
-            $state->bindParam(1, $idDiscution );
+            $state = $connexionPdo->prepare("SELECT * FROM Discussion WHERE idDiscussion = ? ")
+            $state->bindParam(1, $idDiscussion );
             $state->execute();
 
             $resultat = $state->fetchAll();
 
             foreach($resultat as $lineResultat)
             {
-                $discution = new Discution();
-                $discution->setIdDiscution($lineResultat["idDiscution"]);
-                $discution->setTitreDiscution($lineResultat["titreDiscution"]);
-                $discution->setTexteDiscussion($lineResultat["texteDiscussion"]);
-                $discution->setDatePublicationDiscussion($lineResultat["datePublicationDiscussion"]);
-                $discution->setIdClosed($lineResultat["idClosed"]);
-                $discution->setIdCategorie($lineResultat["idCategorie"]);
+                $discussion = new Discussion();
+                $discussion->setIdDiscussion($lineResultat["idDiscussion"]);
+                $discussion->setTitreDiscussion($lineResultat["titreDiscussion"]);
+                $discussion->setTexteDiscussion($lineResultat["texteDiscussion"]);
+                $discussion->setDatePublicationDiscussion($lineResultat["datePublicationDiscussion"]);
+                $discussion->setIdClosed($lineResultat["idClosed"]);
+                $discussion->setIdCategorie($lineResultat["idCategorie"]);
 
-                $discuTab [] = $discution;
+                $discuTab [] = $discussion;
             }
             return $discuTab;
         }
