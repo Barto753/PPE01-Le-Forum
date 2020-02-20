@@ -8,7 +8,7 @@
         {
             $connexionPdo = dataBaseLinker::getConnexion();
 
-            $state = $connexionPdo->prepare("INSERT INTO Discussion(titreDiscussion, texteDiscussion , datePublicationDiscussion, idClosed, idCategorie) VALUES( ? ,? ,?, ?, ? )");
+            $state=$connexionPdo->prepare("INSERT INTO Discussion(titreDiscussion, texteDiscussion , datePublicationDiscussion, idClosed, idCategorie) VALUES( ? ,? ,?, ?, ? )");
 
             $titreDiscussion = $discussion->getTitreDiscussion();
             $texteDiscussion  = $discussion->getTexteDiscussion ();
@@ -32,7 +32,7 @@
 
             $connexionPdo = dataBaseLinker::getConnexion();
 
-            $state = $connexionPdo->prepare("SELECT * FROM Discussion WHERE idDiscussion = ? ")
+            $state = $connexionPdo->prepare("SELECT * FROM Discussion WHERE idDiscussion = ? ");
             $state->bindParam(1, $idDiscussion );
             $state->execute();
 
