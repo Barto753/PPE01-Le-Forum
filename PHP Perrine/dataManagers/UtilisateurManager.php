@@ -1,12 +1,26 @@
 <?php
 
-    include_once("C:/UwAmp/www/TestPPE01/dataManagers/DatabaseLinker.php");
-    include_once("C:/UwAmp/www/TestPPE01/data/Utilisateur.php");
+    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/dataManagers/DatabaseLinker.php");
+    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Utilisateur.php");
     
     class UtilisateurManager
     {
         public static function initUser($user)
         {
+            
+        }
+        
+        public static function updateConnexion($user)
+        {
+            $connex = DatabaseLinker::getConnexion();
+            
+            $statutConnexion = $user->getIsConnected();
+            $pseudo = $user->getPseudo();
+            
+            $state=$connex->prepare("UPDATE Utilisateur SET isConnected=? WHERE pseudo=?");
+            $state->bindParam(1,$statutConnexion);
+            $state->bindParam(2,$pseudo);
+            $state->execute();
             
         }
         

@@ -1,9 +1,9 @@
 <?php
     
-    include_once("C:/UwAmp/www/TestPPE01/include/header.php");
-    include_once("C:/UwAmp/www/TestPPE01/data/Utilisateur.php");
-    include_once("C:/UwAmp/www/TestPPE01/dataManagers/DatabaseLinker.php");
-    include_once("C:/UwAmp/www/TestPPE01/dataManagers/UtilisateurManager.php");
+    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/include/header.php");
+    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Utilisateur.php");
+    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/dataManagers/DatabaseLinker.php");
+    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/dataManagers/UtilisateurManager.php");
 ?>
 
 <div class="inscription-box">
@@ -75,5 +75,5 @@
     }
     
     
-    include("C:/UwAmp/www/TestPPE01/include/footer.php")
+    include("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/include/footer.php")
 ?>
