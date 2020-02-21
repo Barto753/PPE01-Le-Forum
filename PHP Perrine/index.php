@@ -9,35 +9,83 @@
     include_once("dataManagers/ConnexionManager.php");
     
     
-    
-    if(!empty($_POST["pseudo"]) && !empty($_POST["password"]))
+    if(empty($_POST["pseudo"]) && empty($_POST["password"]))
     {
-        if((ConnexionManager::testConnexionUser($_POST["pseudo"]))==true)
+        echo "<a href='inscription.php'> Inscription </a>";
+        
+        ?>
+
+            <div class="connexion-box">
+
+                <h1> Connexion </h1>
+
+                <form method="POST" action="index.php">
+
+                    <label> Pseudo </label>
+                    <input type="text" id="idPseudo" name="pseudo"/>
+                    <label> Mot de passe </label>
+                    <input type="password" id="idPassword" name="password"/>
+                    <input type="submit" value="Connexion"/>
+
+                </form>
+
+            </div>
+
+        <?php
+    
+        
+    }
+    
+    $tabErreurs=array();
+    
+    if(!empty($_POST))
+    {
+        if(empty($_POST["pseudo"]))
         {
-            $_SESSION["login"]=$_POST["pseudo"];
+            $tabErreurs["pseudo"]= "Veuillez saisir un pseudo.";
+        }
+
+        if(empty($_POST["password"]))
+        {
+            $tabErreurs["password"]= "Veuillez saisir un mot de passe.";
+        }
+
+        foreach($tabErreurs as $error)
+        {
+            echo $error;
+        }
+
+        if(empty($tabErreurs))
+        {
+            if((ConnexionManager::testConnexionUser($_POST["pseudo"]))==true)
+            {
+                $user = UtilisateurManager::findUser($_POST["pseudo"]);
+                $user->setIsConnected(1);
+                UtilisateurManager::updateConnexion($user);
+
+                $_SESSION["login"]=$_POST["pseudo"];
+
+                echo '<a href="index.php?online=0"> Deconnexion </a>';
             
-            ?>
-                <a href="index.php?deco=true"> Deconnexion </a>
-            <?php
+                if(!empty($_GET["online"]) && $_GET["online"]==0)
+                {
+                    $user->setIsConnected(0);
+                    UtilisateurManager::updateConnexion($user);
+                    //echo $user->getIsConnected();
+
+                    session_unset();
+                    session_destroy();
+                }
+            }
+            else
+            {
+                echo "Utilisateur ou mot de passe erroné, veuillez vous inscrire.";
+                echo "<a href='inscription.php'> OK </a>";
+            }
         }
     }
-    else
-    {
-        echo "<a href='connexion.php'> Connexion </a>";
-        echo "<a href='inscription.php'> Inscription </a>";
-    }
-
     
     
-    
-    if(!empty($_GET["deco"]) && $_GET["deco"] == true)
-    {
-        /*$user = UtilisateurManager::findUser($_POST["pseudo"]);
-        ConnexionManager::updateConnexionOnline($user->getPseudo());*/
-        
-        session_unset();
-        session_destroy();
-    }
     
     
 
