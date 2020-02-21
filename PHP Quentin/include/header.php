@@ -3,5 +3,5 @@
 	<head>
 		<meta charset="utf-8" />
 		<title> Forum Page Acueuil </title>
-        <link rel="stylesheet" type="text/css" href="css/Acueuil.css" media="all"/>     (--- *refaire le href 
+        <link rel="stylesheet" type="text/css" href="style/style.css" media="all"/>  
 	</head>

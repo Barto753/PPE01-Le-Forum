@@ -52,5 +52,24 @@
             }
             return $discuTab;
         }
+
+        public static function getMessage($idDiscu)
+        {
+            $connexionPdo = Databaselinker::getConnection();
+
+            $msjTab = array();
+
+            $state = $connexionPdo->prepare("SELECT idMessage FROM  WHERE idArticle=? ORDER BY dateParution")
+            $state->bindParam(1, $idDiscu);
+            $state->execute();
+
+            $resultat = $state->fetchAll();
+
+            foreach($resultat as $lineResult)
+            {
+                $msj = DiscussionManager::findDiscution($lineResult["idMessage"]);
+                $msjTab [] = $msj;
+            }
+        }
     }
 ?>
