@@ -12,6 +12,10 @@
 					<input type="text" id="idLogin" name="Prenom" class="input_login" required>
 				</div>
 				<div>
+					<label for="idLogin">nom:</label>
+					<input type="text" id="idLogin" name="nom" class="input_login" required>
+				</div>
+				<div>
 					<label for="mail">E-mail:</label>
 					<input type="text" id="mail" name="mail" class="input_login" required>
 				</div>
