@@ -38,9 +38,15 @@
 
             foreach($resultat as $lineResultat)
             {
-
+                $message = new message();
+                $message->setIdMessage($lineResultat["idMessage"]);
+                $message->setTexteMessage($lineResultat["texteResultat"]);
+                $message->setDatePublicationMessage($lineResultat["datePublicationMessage"]);
+                $message->setIdUser($lineResultat["idUser"]);
+                $message->setIdDiscussion($lineResultat["idDiscussion"]);
+                $msjTab [] = $message;
             }
-
+            return $msjTab;
         }
     }
 ?>
