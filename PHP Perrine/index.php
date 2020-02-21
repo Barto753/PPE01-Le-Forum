@@ -14,7 +14,6 @@
         echo "<a href='inscription.php'> Inscription </a>";
         
         ?>
-
             <div class="connexion-box">
 
                 <h1> Connexion </h1>
@@ -30,10 +29,8 @@
                 </form>
 
             </div>
-
         <?php
     
-        
     }
     
     $tabErreurs=array();
@@ -64,18 +61,8 @@
                 UtilisateurManager::updateConnexion($user);
 
                 $_SESSION["login"]=$_POST["pseudo"];
-
-                echo '<a href="index.php?online=0"> Deconnexion </a>';
-            
-                if(!empty($_GET["online"]) && $_GET["online"]==0)
-                {
-                    $user->setIsConnected(0);
-                    UtilisateurManager::updateConnexion($user);
-                    //echo $user->getIsConnected();
-
-                    session_unset();
-                    session_destroy();
-                }
+                print_r($_POST["pseudo"]);
+                echo '<a href="index.php?deco=true"> Deconnexion </a>';
             }
             else
             {
@@ -85,9 +72,18 @@
         }
     }
     
-    
-    
-    
+    if(!empty($_GET["deco"]) && $_GET["deco"]==true)
+    {
+        $user = UtilisateurManager::findUser($_SESSION["login"]);
+        $user->setIsConnected(0);
+        UtilisateurManager::updateConnexion($user);
+        if($user->getIsConnected()==0)
+        {
+            session_unset();
+            session_destroy();
+        }
+    }
+
 
      include("include/footer.php")
 ?>
