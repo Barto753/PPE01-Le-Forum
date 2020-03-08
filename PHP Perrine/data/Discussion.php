@@ -4,10 +4,11 @@
     {
         private $idDiscussion;
         private $titreDiscussion;
-        private $isClosed;
         private $texteDiscussion;
-        private $datePublicationDiscussion;
+        private $dateDiscussion;
+        private $isClosed;
         private $idCategorie;
+        private $idUser;
         
         
         function getIdDiscussion() 
@@ -20,19 +21,19 @@
             return $this->titreDiscussion;
         }
 
-        function getIsClosed() 
-        {
-            return $this->isClosed;
-        }
-
         function getTexteDiscussion() 
         {
             return $this->texteDiscussion;
         }
-
-        function getDatePublicationDiscussion() 
+        
+        function getDateDiscussion() 
         {
-            return $this->datePublicationDiscussion;
+            return $this->dateDiscussion;
+        }
+        
+        function getIsClosed() 
+        {
+            return $this->isClosed;
         }
 
         function getIdCategorie() 
@@ -40,6 +41,11 @@
             return $this->idCategorie;
         }
 
+        function getIdUser()
+        {
+            return $this->idUser;
+        }
+        
         function setIdDiscussion($idDiscussion) 
         {
             $this->idDiscussion = $idDiscussion;
@@ -50,19 +56,19 @@
             $this->titreDiscussion = $titreDiscussion;
         }
 
-        function setIsClosed($isClosed) 
-        {
-            $this->isClosed = $isClosed;
-        }
-
         function setTexteDiscussion($texteDiscussion) 
         {
             $this->texteDiscussion = $texteDiscussion;
         }
 
-        function setDatePublicationDiscussion($datePublicationDiscussion) 
+        function setDateDiscussion($dateDiscussion) 
         {
-            $this->datePublicationDiscussion = $datePublicationDiscussion;
+            $this->dateDiscussion = $dateDiscussion;
+        }
+        
+        function setIsClosed($isClosed) 
+        {
+            $this->isClosed = $isClosed;
         }
 
         function setIdCategorie($idCategorie) 
@@ -70,6 +76,10 @@
             $this->idCategorie = $idCategorie;
         }
         
+        function setIdUser($idUser)
+        {
+            $this->idUser = $idUser;
+        }
     }
 
 ?>

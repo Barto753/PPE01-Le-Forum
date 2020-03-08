@@ -1,6 +1,6 @@
 <?php
 
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/dataManagers/DatabaseLinker.php");
+    include_once("DatabaseLinker.php");
     include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Utilisateur.php");
     
     class UtilisateurManager
@@ -21,7 +21,6 @@
             $state->bindParam(1,$statutConnexion);
             $state->bindParam(2,$pseudo);
             $state->execute();
-            
         }
         
         
