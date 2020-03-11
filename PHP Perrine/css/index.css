@@ -1,18 +1,20 @@
 .html
 {
-    font-family: "Arial", sans-serif;
+    
     font-size: 14px;
     height: 100%;
 }
 
 .body
 {
+    
     margin: 0;
     min-height: 100%;
 }
 
 .page-container
 {
+    font-family: tahoma, sans-serif;
     display: flex;
     justify-content: center;
 }
@@ -43,6 +45,38 @@
     margin-bottom: 5px;
 }
 
+.categorie-container
+{
+    margin-bottom: 40px;
+    padding-bottom : 30px;
+    border-bottom: 1px solid black;
+}
+
+.sujet-titre
+{
+    margin-bottom: 15px;
+    padding: 10px;
+    border-top: 1px solid black;
+    color: #990033;
+    font-size: 30px;
+}
+
+.categorie-nom
+{
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #cccccc;
+    border: 1px solid black;
+    color: white;
+    font-size: 30px;
+}
+
+img
+{
+    height: 30px;
+    width: 30px;
+}
+
 .discussion-container
 {
     margin-bottom: 40px;
@@ -54,8 +88,23 @@
 {
     font-weight: bold;
     font-size: 18px;
-    color: red;
+    color: #990033;
     margin-bottom: 5px;
+}
+
+.discussion-date
+{
+    margin-bottom: 3px;
+}
+
+.discussion-texte
+{
+    margin-bottom: 3px;
+}
+
+.discussion-user
+{
+    margin-bottom: 10px;
 }
 
 .message-container
@@ -63,11 +112,39 @@
     font-weight: normal;
     color: blue;
     font-size: 15px;
+    border: 0.5px solid black;
+    margin-bottom: 5px;
+    padding: 10px;
 }
 
 .message-texte
 {
-    background-color: #ffead1;
+    background-color: #cccccc;
     padding: 10px;
-    margin-bottom: 15px;
 }
+
+.message-date
+{
+    padding-left: 10px;
+}
+
+.message-user
+{
+    padding-left: 10px;
+}
+
+.new-discussion-container
+{
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #990033;
+    border-bottom: 1px solid black;
+    border-top:1px solid black;
+    color: white;
+}
+
+.new-discussion-button
+{
+    
+}
+

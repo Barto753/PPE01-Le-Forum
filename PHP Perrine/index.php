@@ -14,16 +14,16 @@
     include_once("dataManagers/ConnexionManager.php");
     include_once("dataManagers/DiscussionManager.php");
     include_once("dataManagers/MessageManager.php");
+    include_once("dataManagers/CategorieManager.php");
 
     if(empty($_POST["pseudo"]) && empty($_POST["password"]))
     {
-        ?>
+?>
             <form action="inscription.php">
                 <button type="submit">Inscription</button>
             </form>
             
             <div class="connexion-box">
-
                 <form method="POST" action="index.php">
                     <label> Pseudo </label>
                     <input type="text" id="idPseudo" name="pseudo"/>
@@ -31,9 +31,8 @@
                     <input type="password" id="idPassword" name="password"/>
                     <input type="submit" value="Connexion"/>
                 </form>
-
             </div>
-        <?php
+<?php
     }
 
     $tabErreurs=array();
@@ -86,45 +85,74 @@
             session_destroy();
         }
     }
-
+    
+    
+    //AFICHAGE BOUTON NOUVELLE DISCUSSION
+?>
+        <div class="new-discussion-container">  
+        <div class="new-discussion-button">Créer un nouveau fil de discussion</div>
+        <form action="insertDiscussion.php">
+            <SELECT name="categorie-discussion" size="1">
+                <option>CSS
+                <option>PHP
+                <option>Java
+            </SELECT>
+            <button type="submit">Créer un nouveau fil de discussion</button>
+        </form> 
+        </div>
+        
+<?php
+    //AFFICHAGE CATEGORIES
+    echo "<br>";
+    $tabCategories = CategorieManager::findAllCategories();
+?>
+    <div class="categorie-container">
+        <div class="sujet-titre">SUJETS</div>
+<?php
+    foreach($tabCategories as $categorie)
+    {
+?>
+    <div class="categorie-nom">
+        <img src="images/folder.png"  alt="icone-dossier-categorie">
+        <a href='sujet<?php echo $categorie->getIdCategorie()?>.php?'> <?php echo $categorie->getNomCategorie()?> </a>
+        
+    </div>
+<?php
+    }
+    ?>
+    </div>
+<?php
     //AFFICHAGE DISCUSSIONS
     echo "<br>";
     $tabDiscussions = DiscussionManager::findAllDiscussions();
-
+           
     foreach($tabDiscussions as $discussion)
     {
         $tabMessages = DiscussionManager::getMessages($discussion->getIdDiscussion());
 ?>
         <div class="discussion-container">
-            <div class="discussion-titre"><?php echo "Titre: ".$discussion->getTitreDiscussion(); ?></div>
-            <div class="discussion-date"><?php echo "Date: ".$discussion->getDateDiscussion(); ?></div>
+            <div class="discussion-titre"><?php echo $discussion->getTitreDiscussion(); ?></div>
+            <div class="discussion-date"><?php echo "Créé le ".$discussion->getDateDiscussion(); ?></div>
             <div class="discussion-texte"><?php echo "Texte: ".$discussion->getTexteDiscussion(); ?></div>
-            <div class="discussion-user"><?php echo "idUser: ".$discussion->getIdUser(); ?></div>
+            <div class="discussion-user"><?php echo "Par ".$discussion->getIdUser(); ?></div>
 
-
-        <!-- <form method="POST" action="insertDiscussion.php"> -->
-
-        <?php
-
+ <?php
         foreach($tabMessages as $message)
         {
-        ?>
+?>
             <div class="message-container">
                 <div class="message-user"><?php echo $message->getIdUser(); ?></div>
                 <div class="message-date"><?php echo $message->getDateMessage(); ?></div>
                 <div class="message-texte"><?php echo $message->getTexteMessage(); ?></div>
             </div>
-        <?php
+<?php
         }
-        ?>
+?>
         </div>
 <?php
     }
 
-
-
-
-     include("include/footer.php");
+    include("include/footer.php");
 ?>
         </div>
     </div>

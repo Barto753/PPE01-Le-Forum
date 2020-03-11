@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/data/CategorieDiscussion.php</file>
+            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/css/index.css</file>
+            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/index.php</file>
+            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/dataManagers/DiscussionManager.php</file>
+            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/dataManagers/CategorieManager.php</file>
+        </group>
     </open-files>
 </project-private>
