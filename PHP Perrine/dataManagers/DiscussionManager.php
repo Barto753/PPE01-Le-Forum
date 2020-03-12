@@ -74,6 +74,30 @@
             
             return $tabMessages;
         }
+        
+        public static function insertDiscussion($discussion)
+        {
+            $connex = DatabaseLinker::getConnexion();
+                    
+            $state=$connex->prepare("INSERT INTO Discussion(titreDiscussion, texteDiscussion, dateDiscussion, isClosed, idCategorie, idUser) VALUES (?, ?, ?, ?, ?, ?)");
+            
+            $titreDiscussion = $discussion->getTitreDiscussion();
+            $texteDiscussion = $discussion->getTexteDiscussion();
+            $dateDiscussion = $discussion->getDateDiscussion();
+            $isClosed = $discussion->getIsClosed();
+            $idCategorie = $discussion->getIdCategorie();
+            $idUser = $discussion->getIdUser();
+            
+            $state->bindParam(1,$titreDiscussion);
+            $state->bindParam(2,$texteDiscussion);
+            $state->bindParam(3,$dateDiscussion);
+            $state->bindParam(4,$isClosed);
+            $state->bindParam(5,$idCategorie);
+            $state->bindParam(6,$idUser);
+            
+            $state->execute();
+        }
+        
     }
 
 ?>

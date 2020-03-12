@@ -72,6 +72,32 @@
             
             return $user;
         }
+        
+        public static function findUserWithId($idUser)
+        {
+            $connex = DatabaseLinker::getConnexion();
+            $user=null;
+            $state=$connex->prepare("SELECT * FROM Utilisateur WHERE idUser=?");
+            $state->bindParam(1,$idUser);
+            $state->execute();
+                        
+            $resultatsUsers=$state->fetchAll();
+                    
+            if(!empty($resultatsUsers))
+            {
+                $resultUser=$resultatsUsers[0];
+                $user = new Utilisateur(); 
+                $user->setIdUser($resultUser["idUser"]);
+                $user->setPseudo($resultUser["pseudo"]);
+                $user->setEmail($resultUser["email"]);
+                $user->setCheminAvatar($resultUser["cheminAvatar"]);
+                $user->setPassword($resultUser["password"]);
+                $user->setIsAdmin($resultUser["isAdmin"]);
+                $user->setIsConnected($resultUser["isConnected"]);
+            }
+            
+            return $user;
+        }
     }
 
 ?>

@@ -2,7 +2,8 @@
 
     include_once("DatabaseLinker.php");
     include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/CategorieDiscussion.php");
-
+    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/dataManagers/DiscussionManager.php");
+    
     class CategorieManager
     {
         public static function findCategorie($idCategorie)
@@ -46,6 +47,28 @@
                 $tabCategories[] = $categorie;
             }
             return $tabCategories;
+        }
+        
+        public static function getDiscussions($idCategorie)
+        {
+            $tabDiscussions = array();
+            
+            $connex = DatabaseLinker::getConnexion();
+            
+            $state = $connex->prepare("SELECT idDiscussion FROM Discussion WHERE idCategorie=? ORDER BY dateDiscussion DESC");
+            
+            $state->bindParam(1, $idCategorie);
+            $state->execute();
+            
+            $resultats = $state->fetchAll();
+            
+            foreach($resultats as $result)
+            {
+                $discussion = DiscussionManager::findDiscussion($result["idDiscussion"]);
+                $tabDiscussions[] = $discussion;
+            }
+            
+            return $tabDiscussions;
         }
     }
 

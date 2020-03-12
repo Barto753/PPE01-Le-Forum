@@ -1,4 +1,6 @@
 <?php
+    session_name("PPE01");
+    session_start();
     
     include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/include/header.php");
     include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Utilisateur.php");
