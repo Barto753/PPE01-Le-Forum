@@ -1,14 +1,16 @@
 <?php
-    session_name("PPE01");
-    session_start();
+    include_once("include/header.php");
+    include_once("dataManagers/DiscussionManager.php");
+    include_once("data/Discussion.php");
     
     date_default_timezone_set('Europe/Paris');
+    print_r($_POST["idUser"]);
     
     if(!empty($_POST["idUser"]) && !empty($_POST["titreDiscussion"]) && !empty($_POST["texteDiscussion"]))
     {
-        if($_GET["categorie-discussion"]=="CSS")
+        if($_POST["categorie-discussion"]==("Chien"))
         {
-            $dicussion = new Discussion();
+            $discussion = new Discussion();
             $discussion->setTitreDiscussion($_POST["titreDiscussion"]);
             $discussion->setTexteDiscussion($_POST["texteDiscussion"]);
             $discussion->setDateDiscussion(date("Y-m-d"));
@@ -19,9 +21,9 @@
             header('Location: sujet1.php');
             exit;
         }
-        else if($_GET["categorie-discussion"]=="PHP")
+        else if($_POST["categorie-discussion"]==("Chat"))
         {
-            $dicussion = new Discussion();
+            $discussion = new Discussion();
             $discussion->setTitreDiscussion($_POST["titreDiscussion"]);
             $discussion->setTexteDiscussion($_POST["texteDiscussion"]);
             $discussion->setDateDiscussion(date("Y-m-d"));
@@ -32,9 +34,9 @@
             header('Location: sujet2.php');
             exit;
         }
-        else if($_GET["categorie-discussion"]=="Java")
+        else if($_POST["categorie-discussion"]==("Rongeur"))
         {
-            $dicussion = new Discussion();
+            $discussion = new Discussion();
             $discussion->setTitreDiscussion($_POST["titreDiscussion"]);
             $discussion->setTexteDiscussion($_POST["texteDiscussion"]);
             $discussion->setDateDiscussion(date("Y-m-d"));
@@ -48,7 +50,7 @@
     }
     
     
-    
+    include_once("include/footer.php");
     
     
 ?>

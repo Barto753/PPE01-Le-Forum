@@ -1,7 +1,4 @@
 <?php
-    session_name("PPE01");
-    session_start();
-    
     include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/include/header.php");
     include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Utilisateur.php");
     include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/dataManagers/DatabaseLinker.php");
@@ -10,16 +7,16 @@
 
 <div class="inscription-box">
         
-    <h1> Inscription </h1>
+    <div class="inscription-box-titre"> Inscription </div>
 
     <form method="POST" action="inscription.php">
 
-        <label> Pseudo </label>
-        <input type="text" id="idPseudo1" name="pseudo1"/>
-        <label> E-mail </label>
-        <input type="text" id="idEmail1" name="email1"/>
-        <label> Mot de passe </label>
-        <input type="password" id="idPassword1" name="password1"/>
+        
+        <input type="text" id="idPseudo1" name="pseudo1" placeholder="pseudo"/>
+        
+        <input type="text" id="idEmail1" name="email1" placeholder="email"/>
+        
+        <input type="password" id="idPassword1" name="password1" placeholder="mot de passe"/>
         <input type="submit" value="Valider"/>
 
     </form> 

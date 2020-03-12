@@ -1,11 +1,7 @@
 <?php
-    session_name("PPE01");
-    session_start();
-    
     include_once("include/header.php");
 ?>
-    <div class="page-container">
-        <div class="page-content">
+    
 <?php    
     
     include_once("data/Utilisateur.php");
@@ -19,19 +15,21 @@
     if(empty($_POST["pseudo"]) && empty($_POST["password"]))
     {
 ?>
+        <div class="inscription-button">
             <form action="inscription.php">
                 <button type="submit">Inscription</button>
             </form>
-            
-            <div class="connexion-box">
-                <form method="POST" action="index.php">
-                    <label> Pseudo </label>
-                    <input type="text" id="idPseudo" name="pseudo"/>
-                    <label> Mot de passe </label>
-                    <input type="password" id="idPassword" name="password"/>
-                    <input type="submit" value="Connexion"/>
-                </form>
-            </div>
+        </div>
+
+        <div class="connexion-box">
+            <form method="POST" action="index.php">
+                <label> Pseudo </label>
+                <input type="text" id="idPseudo" name="pseudo"/>
+                <label> Mot de passe </label>
+                <input type="password" id="idPassword" name="password"/>
+                <input type="submit" value="Connexion"/>
+            </form>
+        </div>
 <?php
     }
 
@@ -70,25 +68,25 @@
                 {
 ?>
                 <div class="new-discussion-container">  
-                <div class="new-discussion-button">Créer un nouveau fil de discussion</div>
-                <form action="insertDiscu.php">
-                    <SELECT name="categorie-discussion" size="1">
-                        <option>CSS
-                        <option>PHP
-                        <option>Java
-                    </SELECT>
-                    <input type="text" name="titreDiscussion" placeholder="Titre de la nouvelle discussion"/>
-                    <input type="text" name="texteDiscussion" placeholder="Contenu"/>
-                    <input type="hidden" name="idUser" value="<?php $user->getIdUser() ?>"/>
-                    <button type="submit">Créer</button>
-                </form> 
+                    <div class="new-discussion-button">Créer un nouveau fil de discussion</div>
+                    <form method="POST" action="insertDiscu.php">
+                        <SELECT name="categorie-discussion" size="1">
+                            <option>Chien
+                            <option>Chat
+                            <option>Rongeur
+                        </SELECT>
+                        <input type="text" name="titreDiscussion" placeholder="Titre de la nouvelle discussion"/>
+                        <input type="text" name="texteDiscussion" placeholder="Contenu"/>
+                        <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
+                        <button type="submit">Créer</button>
+                    </form> 
                 </div>  
 <?php  
-        }
+                }
             }
             else
             {
-                echo "Utilisateur ou mot de passe erroné, veuillez vous inscrire.";
+                echo "Pseudo ou mot de passe erroné, veuillez vous inscrire.";
                 echo "<a href='inscription.php'> OK </a>";
             }
         }
@@ -111,7 +109,7 @@
     
 
 //AFFICHAGE CATEGORIES
-    echo "<br>";
+
     $tabCategories = CategorieManager::findAllCategories();
 ?>
     <div class="categorie-container">

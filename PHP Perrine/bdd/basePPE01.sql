@@ -83,28 +83,34 @@ FOREIGN KEY (idUser)
 REFERENCES Utilisateur(idUser);
 
 INSERT INTO Utilisateur(pseudo, email, cheminAvatar, password, isAdmin, isConnected) VALUES
-("Michel63", "michel63@mail.fr", "null", "1234", 0, 0),
-("Hubert59", "hubert59@mail.fr", "null", "5678", 0, 0),
-("Pingu", "pingu@mail.fr", "null", "AZERTY", 1, 0),
-("Q63", "q63@mail.fr", "null", "WXCVBN", 1, 0);
+("michel", "michel@mail.fr", "null", "1234", 0, 0),
+("hubert59", "hubert59@mail.fr", "null", "5678", 0, 0),
+("pingu", "pingu@mail.fr", "null", "AZERTY", 1, 0),
+("q63", "q63@mail.fr", "null", "WXCVBN", 1, 0);
 
 INSERT INTO CategorieDiscussion(nomCategorie) VALUES
-("CSS"),
-("PHP"),
-("Java");
+("Chien"),
+("Chat"),
+("Rongeur");
 
 INSERT INTO Discussion(titreDiscussion, texteDiscussion, dateDiscussion, isClosed, idCategorie, idUser) VALUES
-("Colorer en bleu un texte", "Je n'arrive pas à colorer en bleu un texte en CSS.", "2014-08-11", 0, 1, 1),
-("Centrer un titre", "Salut, comment on centre un titre en CSS ?", "2016-04-12", 0, 1, 2),
-("Appeler une méthode static", "Comment on appelle une méthode static en PHP ?", "2017-05-22", 0, 2, 2),
-("Synthaxe boucle for", "Hello, quelle est la synthaxe d'une boucle for en Java ?", "2019-11-02", 0, 3, 1);
+("Nourrir son chiot", "Que donner à manger à un chiot ?", "2018-06-10", 0, 1, 1),
+("Balader un chien dangereux", "Faut-il mettre une muselière à un berger allemand ?", "2019-08-24", 0, 1, 2),
+("Voyager avec un chat", "Salut, comment je pourrais me déplacer avec mon chat lors de mes voyages selon vous ?", "2017-12-23", 0, 2, 3),
+("Chat ne perdant pas ses poils", "Quelle race ne perd pas trop ses poils car je suis alergique ?", "2019-07-04", 0, 2, 2), 
+("Cage pour souris", "Quelle taille pour une cage avec 6 souris ?", "2020-03-02", 0, 3, 1), 
+("Longévité d'un hamster", "Combien de temps vivent les hamster ?", "2018-02-18", 0, 3, 4); 
 
 INSERT INTO Message(texteMessage, dateMessage, idUser, idDiscussion) VALUES
-("Je crois que c'est -> color:blue;", "2014-10-12", 3, 1), #Pingu rep Michel
-("Salut, c'est color:blue", "2014-11-22", 2, 1), #Hubert rep Michel
-("Pour centrer un texte c'est text-align:center", "2016-04-17", 1, 2), #Michel rep Hubert
-("Je sais pas", "2017-03-07", 4, 2), #Q rep Hubert
-("Blabla", "2017-07-23", 1, 3), #Michel rep Hubert
-("Bonjour","2017-09-21", 4, 3), #Barto rep Hubert
-("HELLO","2019-12-02", 2, 4), #Hubert rep Michel
-("Pouet", "2020-02-18", 3, 4); #Pingu rep Michel
+("Quel âge a ton chiot ?", "2018-07-11", 2, 1),
+("S'il vient de naitre, juste du lait.", "2018-08-015", 3, 1),
+("Si tu te balades en ville oui.", "2019-10-22", 3, 2),
+("Non pas besoin avec cette race.", "2020-02-04", 1, 2), 
+("Achète un sac spécial.", "2018-01-31", 1, 3), 
+("Avec tes jambes LOL", "2018-07-17", 2, 3), 
+("Les sphynx n'ont pas de poils.","2019-09-21", 3, 4),
+("Oui, j'avoue les chats sphynx.","2020-01-12", 4, 4), 
+("Au moins 8m2.", "2020-03-04", 2, 5), 
+("5 mètres carrés je pense.", "2020-02-25", 4, 5), 
+("Pas plus de 5/6 ans.", "2019-06-19", 1, 6),
+("De quelle race es ton hamster ?", "2019-10-08", 3, 6);
