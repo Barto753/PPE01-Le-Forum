@@ -218,16 +218,39 @@ img
 
 .new-discussion-container
 {
+    margin-top: 15px;
     margin-bottom: 15px;
-    padding: 10px;
-    background-color: #990033;
+    /*padding: 10px;*/
+    background-color: black;
     border-bottom: 1px solid black;
     border-top:1px solid black;
     color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-discussion-liste
+{
+    margin: 5px;
+}
+
+.new-discussion-titre
+{
+    margin: 5px;
+}
+.new-discussion-contenu
+{
+    margin: 5px;
+    width: 680px;
+    height: 80px;
+}
+
+.new-discussion-entete
+{
+    margin: 5px;
 }
 
 .new-discussion-button
 {
-    
+    margin: 5px;
 }
-

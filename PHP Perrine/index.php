@@ -1,5 +1,7 @@
 <?php
     include_once("include/header.php");
+    session_start();
+
 ?>
     
 <?php    
@@ -12,7 +14,7 @@
     include_once("dataManagers/MessageManager.php");
     include_once("dataManagers/CategorieManager.php");
 
-    if(empty($_POST["pseudo"]) && empty($_POST["password"]))
+    if(empty($_SESSION["login"]))//empty($_POST["pseudo"]) && empty($_POST["password"])
     {
 ?>
         <div class="inscription-button">
@@ -51,46 +53,68 @@
         {
             echo $error;
         }
+    }
+    
+    if(empty($tabErreurs)==true && ConnexionManager::testConnexionUser($_POST["pseudo"])==true)
+    {
+        $user = UtilisateurManager::findUser($_POST["pseudo"]);
+        $user->setIsConnected(1);
+        UtilisateurManager::updateConnexion($user);
 
-        if(empty($tabErreurs))
+        $_SESSION["login"]=$_POST["pseudo"];
+        if(isset($_SESSION["login"]))
         {
-            if((ConnexionManager::testConnexionUser($_POST["pseudo"]))==true)
-            {
-                $user = UtilisateurManager::findUser($_POST["pseudo"]);
-                $user->setIsConnected(1);
-                UtilisateurManager::updateConnexion($user);
-
-                $_SESSION["login"]=$_POST["pseudo"];
-                print_r($_POST["pseudo"]);
-                echo '<a href="index.php?deco=true"> Deconnexion </a>';
-                
-                if($user->getIsConnected()==1)
-                {
+            echo "Vous êtes connecté en tant que ".$_SESSION["login"];
+        }
 ?>
-                <div class="new-discussion-container">  
-                    <div class="new-discussion-button">Créer un nouveau fil de discussion</div>
+        <form action="index.php?deco=true">
+            <button type="submit">Déconnexion</button>
+        </form>
+<?php
+        if($user->getIsConnected()==1)
+        {
+?>
+            <div class="new-discussion-container">  
+                <div class="new-discussion-entete">Créer un nouveau fil de discussion</div>
+                <div class="new-discussion-liste">
                     <form method="POST" action="insertDiscu.php">
-                        <SELECT name="categorie-discussion" size="1">
-                            <option>Chien
-                            <option>Chat
-                            <option>Rongeur
-                        </SELECT>
-                        <input type="text" name="titreDiscussion" placeholder="Titre de la nouvelle discussion"/>
-                        <input type="text" name="texteDiscussion" placeholder="Contenu"/>
-                        <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
-                        <button type="submit">Créer</button>
-                    </form> 
-                </div>  
+                    <SELECT name="categorie-discussion" size="1">
+                        <option>Chien
+                        <option>Chat
+                        <option>Rongeur
+                    </SELECT>
+                </div>
+                <div class="new-discussion-titre">
+                    <input type="text" name="titreDiscussion" placeholder="Titre de la nouvelle discussion"/>
+                </div>
+                <div class="new-discussion-contenu">
+                    <input type="text" name="texteDiscussion" placeholder="Contenu" style="width: 100%; height: 100%"/>
+                </div>
+                    <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
+                <div class="new-discussion-button">
+                    <button type="submit">Créer</button>
+                </div>
+                </form> 
+            </div>  
 <?php  
-                }
-            }
-            else
-            {
-                echo "Pseudo ou mot de passe erroné, veuillez vous inscrire.";
-                echo "<a href='inscription.php'> OK </a>";
-            }
         }
     }
+    else if(isset($_SESSION["login"]))
+    {
+        echo "Vous êtes connecté en tant que ".$_SESSION["login"];
+?>
+        <form action="index.php?deco=true">
+            <button type="submit">Déconnexion</button>
+        </form>
+<?php
+    }
+    else
+    {
+        echo "Pseudo ou mot de passe erroné, veuillez vous inscrire.";
+        echo "<a href='inscription.php'> OK </a>";
+    }
+        
+    
 
     if(!empty($_GET["deco"]) && $_GET["deco"]==true)
     {
@@ -115,12 +139,13 @@
     <div class="categorie-container">
         <div class="sujet-titre">SUJETS</div>
 <?php
+
     foreach($tabCategories as $categorie)
     {
 ?>
     <div class="categorie-nom">
         <img src="images/folder.png"  alt="icone-dossier-categorie">
-        <a href='sujet<?php echo $categorie->getIdCategorie()?>.php?'> <?php echo $categorie->getNomCategorie()?> </a>
+        <a href='sujet<?php echo $categorie->getIdCategorie().".php?"."pseudo=".$_SESSION['login']; ?>'> <?php echo $categorie->getNomCategorie()?> </a>
         
     </div>
 <?php

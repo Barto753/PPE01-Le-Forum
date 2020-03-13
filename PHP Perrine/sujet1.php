@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     include_once("include/header.php");
     
     include_once("data/Utilisateur.php");
@@ -25,8 +26,14 @@
     
             
  <?php
+    
+ 
+    //$_SESSION["login"]=$_GET["pseudo"];
+    if(isset($_SESSION["login"]))
+    {
+        echo "Vous êtes connecté en tant que ".$_SESSION["login"];
+    }
     //AFFICHAGE DISCUSSIONS
-
     $tabDiscussions = CategorieManager::getDiscussions(1);
     $user= new Utilisateur();
 
@@ -44,6 +51,20 @@
         <div class="discussion-texte"><?php echo "Texte: ".$discussion->getTexteDiscussion(); ?></div>
         <div class="discussion-user"><?php echo "Par ".$user->getPseudo(); ?></div>
         <div class="message-nombre"><?php echo "Messages (".sizeof($tabMessages).")";?></div>
+        
+        <?php //$user=Util;?>
+        <div class="new-message-container">
+            <div class="new-message-entete">Réagir à la discussion</div>
+            <form method="POST" action="insertMsg.php">
+                <div class="new-message-contenu">
+                    <input type="text" name="texteMsg" placeholder="Contenu"/>
+                </div>
+                    <input type="hidden" name="idUser" value="<?php //echo $user->getIdUser(); ?>"/>
+                <div class="new-discussion-button">
+                    <button type="submit">Poster</button>
+                </div>
+            </form>
+        </div>
 <?php
         foreach($tabMessages as $message)
         {

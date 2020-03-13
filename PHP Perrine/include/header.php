@@ -1,8 +1,10 @@
 <?php
-if(empty($_SESSION))
-{
+/*
     session_start();
-}
+    if(isset($_SESSION["pseudo"]))
+    {
+        echo "Vous êtes connecté en tant que ".$_SESSION["pseudo"];
+    }*/
     ?>
     <!DOCTYPE html>
 <html lang="fr">
