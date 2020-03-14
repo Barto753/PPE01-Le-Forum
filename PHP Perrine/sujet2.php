@@ -1,4 +1,5 @@
-<?php
+<?php 
+    session_start();
     include_once("include/header.php");
     
     include_once("data/Utilisateur.php");
@@ -10,19 +11,31 @@
     include_once("dataManagers/CategorieManager.php");
 ?>
     
-
+            
  <?php
-    //AFFICHAGE DISCUSSIONS
     
-    $tabDiscussions = CategorieManager::getDiscussions(2);
-    $user= new Utilisateur();
+ 
+    
+    if(isset($_SESSION["login"]))
+    {
+        echo "Vous êtes connecté en tant que ".$_SESSION["login"];
+?>
+        <a href="index.php?deco=true">Déconnexion</a>
+<?php
+    }
+    
+    //AFFICHAGE DISCUSSIONS
+    $idCategorie = 2;
+    $tabDiscussions = CategorieManager::getDiscussions($idCategorie);
+    $categorie = CategorieManager::findCategorie($idCategorie);
+    $user = new Utilisateur();
 
     foreach($tabDiscussions as $discussion)
     {
 ?>
         <div class="discussion-container">
 <?php
-        $user= UtilisateurManager::findUserWithId($discussion->getIdUser());
+        $user = UtilisateurManager::findUserWithId($discussion->getIdUser()); //user associée à la discussion
         $tabMessages = DiscussionManager::getMessages($discussion->getIdDiscussion());
 ?>
     
@@ -30,8 +43,32 @@
         <div class="discussion-date"><?php echo "Créé le ".$discussion->getDateDiscussion(); ?></div>
         <div class="discussion-texte"><?php echo "Texte: ".$discussion->getTexteDiscussion(); ?></div>
         <div class="discussion-user"><?php echo "Par ".$user->getPseudo(); ?></div>
-
+        <div class="message-nombre"><?php echo "Messages (".sizeof($tabMessages).")";?></div>
+        
+<?php 
+        //AFFICHAGE BOX NEW MESSAGE
+        if(isset($_SESSION["login"]))
+        {
+            $user = UtilisateurManager::findUser($_SESSION["login"]);
+?>
+            <div class="new-message-container">
+            <div class="new-message-entete">Réagir à la discussion</div>
+            <form method="POST" action="insertMsg.php">
+                <div class="new-message-contenu">
+                    <input type="text" name="texteMsg" placeholder="Contenu"/>
+                </div>
+                    <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
+                    <input type="hidden" name="nomCategorie" value="<?php echo $categorie->getNomCategorie(); ?>"/>
+                    <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
+                <div class="new-discussion-button">
+                    <button type="submit">Poster</button>
+                </div>
+            </form>
+            </div>
 <?php
+        }
+        
+        //AFFICHAGE MESSAGES
         foreach($tabMessages as $message)
         {
             $user= UtilisateurManager::findUserWithId($message->getIdUser())
@@ -47,6 +84,6 @@
         </div>
 <?php
     }
-
+    
     include("include/footer.php")
 ?>

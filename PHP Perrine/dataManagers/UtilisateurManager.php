@@ -5,10 +5,10 @@
     
     class UtilisateurManager
     {
-        public static function initUser($user)
+        /*public static function initUser($user)
         {
             
-        }
+        }*/
         
         public static function updateConnexion($user)
         {
