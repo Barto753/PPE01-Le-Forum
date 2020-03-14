@@ -152,7 +152,7 @@
                         <input type="text" name="titreDiscussion" placeholder="Titre de la nouvelle discussion"/>
                     </div>
                     <div class="new-discussion-contenu">
-                        <input type="text" name="texteDiscussion" placeholder="Contenu" style="width: 100%; height: 100%"/>
+                        <input type="text" name="texteDiscussion" placeholder="Contenu" style="width: 100%; height: 100%"/> <?php //<textarea> plusieurs lignes </textarea> ?>
                     </div>
                     <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
                     <div class="new-discussion-button">

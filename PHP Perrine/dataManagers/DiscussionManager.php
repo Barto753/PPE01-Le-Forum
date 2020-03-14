@@ -97,18 +97,29 @@
             
             $state->execute();
         }
-        /*
-        public static function deleteDiscussion($discussion)
+        
+        public static function deleteDiscussion($idDiscussion)
         {
             $connex = DatabaseLinker::getConnexion();
-                    
-            $state=$connex->prepare("DELETE FROM Discussion(idDiscussion, titreDiscussion, texteDiscussion, dateDiscussion, isClosed, idCategorie, idUser) WHERE idDiscussion=?");
+            
+            $state=$connex->prepare("DELETE FROM Discussion WHERE idDiscussion=?");
             
             $state->bindParam(1,$idDiscussion);
             
             $state->execute();
         }
-        */
+        
+        public static function deleteMessages($idDiscussion)
+        {
+            $connex = DatabaseLinker::getConnexion();
+            
+            $state=$connex->prepare("DELETE FROM Message WHERE idDiscussion=?");
+            
+            $state->bindParam(1,$idDiscussion);
+            
+            $state->execute();
+        }
+        
     }
 
 ?>

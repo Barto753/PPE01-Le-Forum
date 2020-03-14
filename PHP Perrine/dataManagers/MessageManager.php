@@ -50,6 +50,7 @@
             $state->bindParam(4, $idDiscussion);
             $state->execute();
         }
+        
     }
 
 ?>

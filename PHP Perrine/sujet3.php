@@ -14,11 +14,12 @@
             
  <?php
     
- 
+    $currentUser = new Utilisateur();
     
     if(isset($_SESSION["login"]))
     {
         echo "Vous êtes connecté en tant que ".$_SESSION["login"];
+        $currentUser = UtilisateurManager::findUser($_SESSION["login"]); //user connecté
 ?>
         <a href="index.php?deco=true">Déconnexion</a>
 <?php
@@ -29,14 +30,29 @@
     $tabDiscussions = CategorieManager::getDiscussions($idCategorie);
     $categorie = CategorieManager::findCategorie($idCategorie);
     $user = new Utilisateur();
-
+    
+    
     foreach($tabDiscussions as $discussion)
     {
 ?>
         <div class="discussion-container">
 <?php
-        $user = UtilisateurManager::findUserWithId($discussion->getIdUser()); //user associée à la discussion
+        $user = UtilisateurManager::findUserWithId($discussion->getIdUser()); //user associé à la discussion
         $tabMessages = DiscussionManager::getMessages($discussion->getIdDiscussion());
+        
+        //AFFICHAGE BOUTON DELETE DISCUSSION
+        if(isset($_SESSION["login"]))
+        {
+            if($currentUser->getIdUser()==$user->getIdUser())
+            {
+?>        
+                <form method="POST" action="deleteDiscu.php">
+                    <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
+                    <button type="submit">Supprimer</button> 
+                </form>
+<?php
+            }
+        }
 ?>
     
         <div class="discussion-titre"><?php echo $discussion->getTitreDiscussion(); ?></div>
@@ -49,7 +65,6 @@
         //AFFICHAGE BOX NEW MESSAGE
         if(isset($_SESSION["login"]))
         {
-            $user = UtilisateurManager::findUser($_SESSION["login"]);
 ?>
             <div class="new-message-container">
             <div class="new-message-entete">Réagir à la discussion</div>
@@ -57,7 +72,7 @@
                 <div class="new-message-contenu">
                     <input type="text" name="texteMsg" placeholder="Contenu"/>
                 </div>
-                    <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
+                    <input type="hidden" name="idUser" value="<?php echo $currentUser->getIdUser(); ?>"/>
                     <input type="hidden" name="nomCategorie" value="<?php echo $categorie->getNomCategorie(); ?>"/>
                     <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
                 <div class="new-discussion-button">
@@ -71,7 +86,7 @@
         //AFFICHAGE MESSAGES
         foreach($tabMessages as $message)
         {
-            $user= UtilisateurManager::findUserWithId($message->getIdUser())
+            $user= UtilisateurManager::findUserWithId($message->getIdUser()); //user associé au message
 ?>
             <div class="message-container">
                 <div class="message-user"><?php echo "de ".$user->getPseudo(); ?></div>

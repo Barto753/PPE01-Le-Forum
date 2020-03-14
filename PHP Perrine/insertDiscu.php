@@ -5,7 +5,6 @@
     include_once("data/Discussion.php");
     
     date_default_timezone_set('Europe/Paris');
-    print_r($_POST["idUser"]);
     
     if(!empty($_POST["idUser"]) && !empty($_POST["titreDiscussion"]) && !empty($_POST["texteDiscussion"]))
     {
