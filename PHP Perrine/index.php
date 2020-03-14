@@ -1,7 +1,6 @@
 <?php
     include_once("include/header.php");
     session_start();
-
 ?>
     
 <?php    
@@ -14,6 +13,7 @@
     include_once("dataManagers/MessageManager.php");
     include_once("dataManagers/CategorieManager.php");
 
+    //si la session n'est pas définie -- NON CONNECTED
     if(empty($_SESSION["login"]))//empty($_POST["pseudo"]) && empty($_POST["password"])
     {
 ?>
@@ -26,17 +26,17 @@
         <div class="connexion-box">
             <form method="POST" action="index.php">
                 <label> Pseudo </label>
-                <input type="text" id="idPseudo" name="pseudo"/>
+                <input type="text" name="pseudo"/>
                 <label> Mot de passe </label>
-                <input type="password" id="idPassword" name="password"/>
+                <input type="password" name="password"/>
                 <input type="submit" value="Connexion"/>
             </form>
         </div>
 <?php
     }
 
+    //si qqch est rentré dans le form mais qu'il manque un champ -- NON CONNECTED + CONNEXION NE FONCTIONNE PAS
     $tabErreurs=array();
-
     if(!empty($_POST))
     {
         if(empty($_POST["pseudo"]))
@@ -55,6 +55,9 @@
         }
     }
     
+    
+    
+    //s'il n'y a pas eu d'erreurs à la connexion et si le user est trouvé dans la bdd
     if(empty($tabErreurs)==true && ConnexionManager::testConnexionUser($_POST["pseudo"])==true)
     {
         $user = UtilisateurManager::findUser($_POST["pseudo"]);
@@ -62,10 +65,11 @@
         UtilisateurManager::updateConnexion($user);
 
         $_SESSION["login"]=$_POST["pseudo"];
-        if(isset($_SESSION["login"]))
-        {
-            echo "Vous êtes connecté en tant que ".$_SESSION["login"];
-        }
+    }
+    
+    if(isset($_SESSION["login"]))
+    {
+        echo "Vous êtes connecté en tant que ".$_SESSION["login"];
 ?>
         <form action="index.php?deco=true">
             <button type="submit">Déconnexion</button>
@@ -98,15 +102,6 @@
             </div>  
 <?php  
         }
-    }
-    else if(isset($_SESSION["login"]))
-    {
-        echo "Vous êtes connecté en tant que ".$_SESSION["login"];
-?>
-        <form action="index.php?deco=true">
-            <button type="submit">Déconnexion</button>
-        </form>
-<?php
     }
     else
     {

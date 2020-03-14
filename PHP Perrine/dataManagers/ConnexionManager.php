@@ -6,11 +6,10 @@
     class ConnexionManager
     {
         
-        public static function testConnexionUser($pseudo)
+        public static function testConnexionUser($pseudo, $password)
         {
             $connexion = false;
             $user = UtilisateurManager::findUser($_POST["pseudo"]);
-
             if($user!=null && $_POST["password"]==$user->getPassword())
             {
                 $connexion = true;
