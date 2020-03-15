@@ -44,7 +44,7 @@
             $discussion->setIdCategorie(3);
             $discussion->setIdUser($_POST["idUser"]);
             DiscussionManager::insertDiscussion($discussion);
-            header('Location: sujet2.php');
+            header('Location: sujet3.php');
             exit;
         }
     }

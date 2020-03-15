@@ -13,7 +13,7 @@
     
             
  <?php
-    
+    date_default_timezone_set('Europe/Paris');
     $currentUser = new Utilisateur();
     
     if(isset($_SESSION["login"]))
@@ -70,7 +70,7 @@
             <div class="new-message-entete">Réagir à la discussion</div>
             <form method="POST" action="insertMsg.php">
                 <div class="new-message-contenu">
-                    <input type="text" name="texteMsg" placeholder="Contenu"/>
+                    <input type="text" name="texteMsg" placeholder="Contenu"/> <?php //texteMsg => texteMessage ? ?>
                 </div>
                     <input type="hidden" name="idUser" value="<?php echo $currentUser->getIdUser(); ?>"/>
                     <input type="hidden" name="nomCategorie" value="<?php echo $categorie->getNomCategorie(); ?>"/>
@@ -87,11 +87,48 @@
         foreach($tabMessages as $message)
         {
             $user= UtilisateurManager::findUserWithId($message->getIdUser()); //user associé au message
+
+            //AFFICHAGE BOUTON DELETE MESSAGE
+            if(isset($_SESSION["login"]))
+            {
+                if($currentUser->getIdUser()==$user->getIdUser())
+                {
+?>        
+                    <form method="POST" action="deleteMsg.php">
+                        <input type="hidden" name="idDiscussion" value="<?php echo $message->getIdDiscussion(); ?>"/>
+                        <input type="hidden" name="idMessage" value="<?php echo $message->getIdMessage() ;?>"/>
+                        <button type="submit">Supprimer</button> 
+                    </form>
+        
+                    
+<?php
+                }
+            }
 ?>
             <div class="message-container">
                 <div class="message-user"><?php echo "de ".$user->getPseudo(); ?></div>
                 <div class="message-date"><?php echo "posté le ".$message->getDateMessage(); ?></div>
-                <div class="message-texte"><?php echo $message->getTexteMessage(); ?></div>
+                <div class="message-texte"><?php echo $message->getTexteMessage(); 
+                    if(isset($_SESSION["login"]))
+                    {
+                        if($currentUser->getIdUser()==$user->getIdUser())
+                        {
+                            /*if(isset($_POST["texteMessage"])) //affichage de la date de la modofication du message marche pas
+                            {
+                                echo "modifié le ".date("Y-m-d");
+                            }*/
+?>
+                            <form method="POST" action="modifMsg.php">
+                                <input type="hidden" name="idDiscussion" value="<?php echo $message->getIdDiscussion(); ?>"/>
+                                <input type="hidden" name="idMessage" value="<?php echo $message->getIdMessage(); ?>"/>
+                                <input type="text" name="texteMessage" placeholder="Contenu"/>
+                                <button type="submit">Modifier</button> 
+                            </form>  
+<?php   
+                        }
+                    }
+?>   
+                </div>
             </div>
 <?php
         }

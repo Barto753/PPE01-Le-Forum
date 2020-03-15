@@ -51,6 +51,32 @@
             $state->execute();
         }
         
+        public static function deleteMessage($idMessage)
+        {
+            $connex = DatabaseLinker::getConnexion();
+            
+            $state=$connex->prepare("DELETE FROM Message WHERE idMessage=?");
+            
+            $state->bindParam(1,$idMessage);
+            
+            $state->execute();
+        }
+        
+        public static function modifMessage($message)
+        {
+            $connex = DatabaseLinker::getConnexion();
+            
+            $idMessage = $message->getIdMessage();
+            $texteMessage = $message->getTexteMessage();
+            
+            $state=$connex->prepare("UPDATE Message SET texteMessage=? WHERE idMessage=?");
+            
+            $state->bindParam(1,$texteMessage);
+            $state->bindParam(2,$idMessage);
+            
+            $state->execute();
+        }
+        
     }
 
 ?>

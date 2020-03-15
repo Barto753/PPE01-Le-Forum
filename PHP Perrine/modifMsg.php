@@ -2,34 +2,34 @@
     include_once("include/header.php");
     
     include_once("dataManagers/DiscussionManager.php");
+    include_once("dataManagers/MessageManager.php");
     include_once("data/Message.php");
     include_once("data/Discussion.php");
     
-    if(!empty($_POST["idDiscussion"]))
+    if(!empty($_POST["idDiscussion"]) && !empty($_POST["idMessage"]) && !empty($_POST["texteMessage"]))
     {
         $discussion = DiscussionManager::findDiscussion($_POST["idDiscussion"]);
+        $message = MessageManager::findMessage($_POST["idMessage"]);
+        $message->setTexteMessage($_POST["texteMessage"]);
         
         if($discussion->getIdCategorie()==1)
         {
             $idCategorie=$discussion->getIdCategorie();
-            DiscussionManager::deleteMessages($_POST["idDiscussion"]);
-            DiscussionManager::deleteDiscussion($_POST["idDiscussion"]);
+            MessageManager::modifMessage($message);
             header('Location: sujet'.$idCategorie.'.php');
             exit;
         }
         else if($discussion->getIdCategorie()==2)
         {
             $idCategorie=$discussion->getIdCategorie();
-            DiscussionManager::deleteMessages($_POST["idDiscussion"]);
-            DiscussionManager::deleteDiscussion($_POST["idDiscussion"]);
+            MessageManager::modifMessage($message);
             header('Location: sujet'.$idCategorie.'.php');
             exit;
         }
         else if($discussion->getIdCategorie()==3)
         {
             $idCategorie=$discussion->getIdCategorie();
-            DiscussionManager::deleteMessages($_POST["idDiscussion"]);
-            DiscussionManager::deleteDiscussion($_POST["idDiscussion"]);
+            MessageManager::modifMessage($message);
             header('Location: sujet'.$idCategorie.'.php');
             exit;
         }
