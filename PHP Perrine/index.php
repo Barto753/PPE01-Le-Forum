@@ -134,6 +134,14 @@
 
         if($user->getIsConnected()==1)
         {
+?>
+            <div class="icone-profil">
+                <a href="profil.php">
+                <img src="images/style-one-pin-user.png" alt="logo-avatar">
+                <input type="hidden" name="idUser" value="<?php $user->getIdUser();?>">
+                </a>
+            </div>
+<?php
             echo "bonjour isconnected du user = 1";
             //AFICHAGE BOX NOUVELLE DISCUSSION
 ?>

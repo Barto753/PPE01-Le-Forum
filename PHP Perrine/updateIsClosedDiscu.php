@@ -8,7 +8,6 @@
     {
         $discussion = DiscussionManager::findDiscussion($_POST["idDiscussion"]);
         $idCategorie = $discussion->getIdCategorie();
-        print_r($_POST["isClosed"]);
         
         if($_POST["isClosed"]==0)
         {

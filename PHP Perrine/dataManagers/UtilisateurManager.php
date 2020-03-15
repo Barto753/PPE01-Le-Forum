@@ -5,10 +5,21 @@
     
     class UtilisateurManager
     {
-        /*public static function initUser($user)
+        public static function updatePassword($user)
         {
+            $connex = DatabaseLinker::getConnexion();
             
-        }*/
+            //$cheminAvatar = $user->getCheminAvatar();
+            $password = $user->getPassword();
+            $idUser = $user->getIdUser();
+            
+            $state=$connex->prepare("UPDATE Utilisateur SET password=? WHERE idUser=?");
+            //$state->bindParam(1,$cheminAvatar);
+            $state->bindParam(1, $password);
+            $state->bindParam(2, $idUser);
+            
+            $state->execute();
+        }
         
         public static function updateConnexion($user)
         {
@@ -20,6 +31,7 @@
             $state=$connex->prepare("UPDATE Utilisateur SET isConnected=? WHERE pseudo=?");
             $state->bindParam(1,$statutConnexion);
             $state->bindParam(2,$pseudo);
+            
             $state->execute();
         }
         
@@ -53,6 +65,7 @@
             $user=null;
             $state=$connex->prepare("SELECT * FROM Utilisateur WHERE pseudo=?");
             $state->bindParam(1,$pseudo);
+            
             $state->execute();
                         
             $resultatsUsers=$state->fetchAll();
@@ -79,6 +92,7 @@
             $user=null;
             $state=$connex->prepare("SELECT * FROM Utilisateur WHERE idUser=?");
             $state->bindParam(1,$idUser);
+            
             $state->execute();
                         
             $resultatsUsers=$state->fetchAll();
