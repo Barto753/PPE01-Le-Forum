@@ -43,7 +43,7 @@
         //AFFICHAGE BOUTON DELETE DISCUSSION
         if(isset($_SESSION["login"]))
         {
-            if($currentUser->getIdUser()==$user->getIdUser() || $currentUser->getIsAdmin()==1)
+            if((($currentUser->getIdUser()==$user->getIdUser() && $discussion->getIsClosed()==0) || ($currentUser->getIsAdmin()==1))==true)
             {
 ?>        
                 <form method="POST" action="deleteDiscu.php">
@@ -51,36 +51,64 @@
                     <button type="submit">Supprimer</button> 
                 </form>
 <?php
+                if($currentUser->getIsAdmin()==1)
+                {
+                    if($discussion->getIsClosed()==0)
+                    {
+?>
+                
+                        <form method="POST" action="updateIsClosedDiscu.php">
+                            <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
+                            <input type="hidden" name="isClosed" value="<?php echo $discussion->getIsClosed(); ?>"/>
+                            <button type="submit">Clore la discussion</button>
+                        </form>
+<?php
+                    }
+                    else if($discussion->getIsClosed()==1)
+                    {
+?>
+                        <form method="POST" action="updateIsClosedDiscu.php">
+                            <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
+                            <input type="hidden" name="isClosed" value="<?php echo $discussion->getIsClosed(); ?>"/>
+                            <button type="submit">Réouvrir la discussion</button>
+                        </form>
+<?php
+                    }
+
+                }
             }
         }
 ?>
-    
+            
         <div class="discussion-titre"><?php echo $discussion->getTitreDiscussion(); ?></div>
+        <?php if($discussion->getIsClosed()==0){ echo "Statut : ouvert"; }else if($discussion->getIsClosed()==1){ echo "Statut : fermé";}?>
         <div class="discussion-date"><?php echo "Créé le ".$discussion->getDateDiscussion(); ?></div>
         <div class="discussion-texte"><?php echo "Texte: ".$discussion->getTexteDiscussion(); ?></div>
         <div class="discussion-user"><?php echo "Par ".$user->getPseudo(); ?></div>
-        <div class="message-nombre"><?php echo "Messages (".sizeof($tabMessages).")";?></div>
-        
+        <div class="message-nombre"><?php echo "Messages (".sizeof($tabMessages).")"; ?></div>
 <?php 
         //AFFICHAGE BOX NEW MESSAGE
         if(isset($_SESSION["login"]))
         {
+            if($discussion->getIsClosed()==0)
+            {
 ?>
-            <div class="new-message-container">
-            <div class="new-message-entete">Réagir à la discussion</div>
-            <form method="POST" action="insertMsg.php">
-                <div class="new-message-contenu">
-                    <input type="text" name="texteMsg" placeholder="Contenu"/> <?php //texteMsg => texteMessage ? ?>
+                <div class="new-message-container">
+                <div class="new-message-entete">Réagir à la discussion</div>
+                <form method="POST" action="insertMsg.php">
+                    <div class="new-message-contenu">
+                        <input type="text" name="texteMsg" placeholder="Contenu"/> <?php //texteMsg => texteMessage ? ?>
+                    </div>
+                        <input type="hidden" name="idUser" value="<?php echo $currentUser->getIdUser(); ?>"/>
+                        <input type="hidden" name="nomCategorie" value="<?php echo $categorie->getNomCategorie(); ?>"/>
+                        <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
+                    <div class="new-discussion-button">
+                        <button type="submit">Poster</button>
+                    </div>
+                </form>
                 </div>
-                    <input type="hidden" name="idUser" value="<?php echo $currentUser->getIdUser(); ?>"/>
-                    <input type="hidden" name="nomCategorie" value="<?php echo $categorie->getNomCategorie(); ?>"/>
-                    <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
-                <div class="new-discussion-button">
-                    <button type="submit">Poster</button>
-                </div>
-            </form>
-            </div>
 <?php
+            }
         }
         
         //AFFICHAGE MESSAGES
@@ -91,7 +119,7 @@
             //AFFICHAGE BOUTON DELETE MESSAGE
             if(isset($_SESSION["login"]))
             {
-                if($currentUser->getIdUser()==$user->getIdUser() || $currentUser->getIsAdmin()==1)
+                if((($currentUser->getIdUser()==$user->getIdUser() && $discussion->getIsClosed()==0) || ($currentUser->getIsAdmin()==1))==true)
                 {
 ?>        
                     <form method="POST" action="deleteMsg.php">
@@ -111,13 +139,14 @@
                 <div class="message-texte"><?php echo $message->getTexteMessage(); 
                     if(isset($_SESSION["login"]))
                     {
-                        if($currentUser->getIdUser()==$user->getIdUser())
+                        if($currentUser->getIdUser()==$user->getIdUser() && $discussion->getIsClosed()==0)
                         {
                             /*if(isset($_POST["texteMessage"])) //affichage de la date de la modofication du message marche pas
                             {
                                 echo "modifié le ".date("Y-m-d");
                             }*/
-                            //BOX MODIF MSG
+                            
+                            //BOX MODIFIER MESSAGE
 ?>
                             <form method="POST" action="modifMsg.php">
                                 <input type="hidden" name="idDiscussion" value="<?php echo $message->getIdDiscussion(); ?>"/>

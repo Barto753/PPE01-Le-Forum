@@ -120,6 +120,20 @@
             $state->execute();
         }
         
+        public static function updateIsClosedDiscussion($discussion)
+        {
+            $connex = DatabaseLinker::getConnexion();
+            
+            $isClosed = $discussion->getIsClosed();
+            $idDiscussion = $discussion->getIdDiscussion();
+            
+            $state=$connex->prepare("UPDATE Discussion SET isClosed=? WHERE idDiscussion=?");
+            
+            $state->bindParam(1,$isClosed);
+            $state->bindParam(2,$idDiscussion);
+            
+            $state->execute();
+        }
     }
 
 ?>
