@@ -43,7 +43,7 @@
         //AFFICHAGE BOUTON DELETE DISCUSSION
         if(isset($_SESSION["login"]))
         {
-            if($currentUser->getIdUser()==$user->getIdUser())
+            if($currentUser->getIdUser()==$user->getIdUser() || $currentUser->getIsAdmin()==1)
             {
 ?>        
                 <form method="POST" action="deleteDiscu.php">
@@ -91,7 +91,7 @@
             //AFFICHAGE BOUTON DELETE MESSAGE
             if(isset($_SESSION["login"]))
             {
-                if($currentUser->getIdUser()==$user->getIdUser())
+                if($currentUser->getIdUser()==$user->getIdUser() || $currentUser->getIsAdmin()==1)
                 {
 ?>        
                     <form method="POST" action="deleteMsg.php">
@@ -117,6 +117,7 @@
                             {
                                 echo "modifié le ".date("Y-m-d");
                             }*/
+                            //BOX MODIF MSG
 ?>
                             <form method="POST" action="modifMsg.php">
                                 <input type="hidden" name="idDiscussion" value="<?php echo $message->getIdDiscussion(); ?>"/>
