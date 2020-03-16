@@ -5,16 +5,11 @@ CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE bdd_forum;
 
-CREATE TABLE IF NOT EXISTS TypeBannissement(
-idType INT,
-libelle VARCHAR(64),
-PRIMARY KEY (idType));
 
 CREATE TABLE IF NOT EXISTS Bannissement(
-idBannissement INT,
-dateDebut DATE,
+idBannissement INT AUTO_INCREMENT,
+motif VARCHAR(64),
 dateFin DATE,
-idType INT,
 idUser INT,
 PRIMARY KEY(idBannissement));
 
@@ -73,11 +68,6 @@ FOREIGN KEY (idUser)
 REFERENCES Utilisateur(idUser);
 
 ALTER TABLE Bannissement
-ADD CONSTRAINT Bannissement_idType
-FOREIGN KEY (idType)
-REFERENCES TypeBannissement(idType);
-
-ALTER TABLE Bannissement
 ADD CONSTRAINT Bannissement_idUser
 FOREIGN KEY (idUser)
 REFERENCES Utilisateur(idUser);
@@ -114,3 +104,7 @@ INSERT INTO Message(texteMessage, dateMessage, idUser, idDiscussion) VALUES
 ("5 mètres carrés je pense.", "2020-02-25", 4, 5), 
 ("Pas plus de 5/6 ans.", "2019-06-19", 1, 6),
 ("De quelle race es ton hamster ?", "2019-10-08", 3, 6);
+
+
+INSERT INTO Bannissement(dateFin, motif, idUser) VALUES
+("2020-03-17", "insultes", 2);

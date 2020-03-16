@@ -2,6 +2,7 @@
 
     include_once("DatabaseLinker.php");
     include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Utilisateur.php");
+    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Bannissement.php");
     
     class UtilisateurManager
     {
@@ -112,6 +113,72 @@
             
             return $user;
         }
+        
+        public static function findAllUsers()
+        {
+            $tabUsers = array();
+            
+            $connex = DatabaseLinker::getConnexion();
+            
+            $state = $connex->prepare("SELECT idUser FROM Utilisateur");
+            $state->execute();
+            
+            $resultats = $state->fetchAll();
+            
+            foreach($resultats as $result)
+            {
+                $user = UtilisateurManager::findUserWithId($result["idUser"]);
+                $tabUsers[] = $user;
+            }
+            return $tabUsers;
+        }
+        
+        public static function updateBannissement()
+        {
+            
+        }
+        
+        public static function findBannissement($idUser)
+        {
+            $connex = DatabaseLinker::getConnexion();
+            $banni=null;
+            $state=$connex->prepare("SELECT * FROM Bannissement WHERE idUser=?");
+            $state->bindParam(1,$idUser);
+            
+            $state->execute();
+                        
+            $resultatsBannis=$state->fetchAll();
+                    
+            if(sizeof($resultatsBannis)>0)
+            {
+                $resultBanni=$resultatsBannis[0];
+                $banni = new Bannissement(); 
+                $banni->setIdBannissement($resultBanni["idBannissement"]);
+                $banni->setMotif($resultBanni["motif"]);
+                $banni->setDateFin($resultBanni["dateFin"]);
+                $banni->setIdUser($resultBanni["idUser"]);
+            }
+            
+            return $banni;
+        }
+        
+        public static function insertBannissement($banni) //Mettre dans BannissementManager.php ???
+        {
+            $connex = DatabaseLinker::getConnexion();
+                    
+            $state=$connex->prepare("INSERT INTO Bannissement(dateFin, motif, idUser) VALUES (?, ?, ?)");
+            
+            $dateFin = $banni->getDateFin();
+            $motif = $banni->getMotif();
+            $idUser = $banni->getIdUser();
+            
+            $state->bindParam(1,$dateFin);
+            $state->bindParam(2,$motif);
+            $state->bindParam(3,$idUser);
+            
+            $state->execute();           
+        }
+        
     }
 
 ?>

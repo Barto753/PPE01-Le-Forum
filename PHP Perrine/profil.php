@@ -25,7 +25,7 @@
         echo " Email : ".$currentUser->getEmail();
         echo "<br><br>";
 ?>
-        <form method="POST" action="modifProfil.php">
+        <form method="POST" action="modifPassword.php">
             <label>Modification du mot de passe : </label>
             <input type="hidden" name="idUser" value="<?php echo $currentUser->getIdUser(); ?>"/>
             <input type="hidden" name="currentPassword" value="<?php echo $currentUser->getPassword()?>"/>
@@ -33,21 +33,31 @@
             <input type="password" name="newPassword" placeholder="Nouveau mot de passe"/> 
             <input type="submit" value="Modifier"/>
         </form>
-            
-            
+        <?php
         
-<?php
-        /*
+        if($currentUser->getIsAdmin()==1)
+        {
 ?>
+            <a href="administration.php">Administration</a>
+<?php
+        }
+        
+        /*
+        ?>
+        
+        <form method="POST" action="modifAvatar.php">
+            <label>Modification de l'avatar : </label>
+            <input type="hidden" name="idUser" value="<?php $currentUser->getIdUser(); ?>"/>
+            <input type="image" name="avatar" value="<?php if"
+        </form>
+        
         <form method="POST" action="modifProfil.php" enctype="multipart/form-data">
             <input type="file" name="newAvatar"/>
             <input type="submit" value="Valider"
         </form>
 <?php
         */
-        
-                
-               
+              
     }
     
     
