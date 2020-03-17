@@ -11,6 +11,7 @@
         $discussion = DiscussionManager::findDiscussion($_POST["idDiscussion"]);
         $message = MessageManager::findMessage($_POST["idMessage"]);
         $message->setTexteMessage($_POST["texteMessage"]);
+        //$dateModif = $_POST["dateModif"];
         
         if($discussion->getIdCategorie()==1)
         {

@@ -9,11 +9,10 @@
     include_once("dataManagers/DiscussionManager.php");
     include_once("dataManagers/MessageManager.php");
     include_once("dataManagers/CategorieManager.php");
-    include_once("data/Bannissement.php");
     
     
     $currentUser = new Utilisateur();
-    $banni = new Bannissement();
+
     
     if(isset($_SESSION["login"]))
     {
@@ -31,11 +30,12 @@
                     <td>IdUser</td>
                     <td>Pseudo</td>
                     <td>Admin</td>
+                    <td>Ban</td>
                 </tr>
 <?php
             foreach ($tabUsers as $user)
             {
-                $banni = UtilisateurManager::findBannissement($user->getIdUser());
+
 ?>
                 <tr>
                     <td> <?php echo $user->getIdUser(); ?></td>
@@ -43,12 +43,22 @@
                     <td> <?php if($user->getIsAdmin()==1){echo "Oui";}else{echo"";} ?></td>
                     <td> 
 <?php
-                        if(empty($banni))
+                        if($user->getIsBanned()==0 && $user->getIsAdmin()==0)
                         {
 ?>
-                            <form method="POST" action="updateBanni.php">
+                            <form method="POST" action="updateBan.php">
                                 <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
                                 <input type="submit" value="Bannir"/>
+                            </form>
+<?php
+                        }
+                        else if($user->getIsBanned()==1 && $user->getIsAdmin()==0)
+                        {
+?>
+                            <form method="POST" action="updateBan.php">
+                                <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
+                                <input type="hidden" name="isBanned" value="<?php echo $user->getIsBanned(); ?>"/>
+                                <input type="submit" value="Debannir"/>
                             </form>
 <?php
                         }

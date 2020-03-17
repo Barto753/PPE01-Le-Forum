@@ -20,10 +20,10 @@
         }
 
 ?>
-        <a href="profil.php">Retour vers le profil</a>
+        <a href="account.php">Retour vers le compte</a>
 <?php
         
-        /*header('Location: profil.php');
+        /*header('Location: account.php');
         exit;*/
         
     }

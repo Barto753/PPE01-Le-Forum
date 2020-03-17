@@ -22,8 +22,15 @@
 <?php
         echo "<br>";
         echo "Pseudo : ".$currentUser->getPseudo();
+        echo "<br>";
         echo " Email : ".$currentUser->getEmail();
+        echo "<br>";
+        echo " Avatar : ";
+        echo '<img class="image-avatar" src="images/'.$currentUser->getCheminAvatar().'"/>';
+                  
         echo "<br><br>";
+        
+        //BOX MODIFIER PASSWORD
 ?>
         <form method="POST" action="modifPassword.php">
             <label>Modification du mot de passe : </label>
@@ -35,28 +42,23 @@
         </form>
         <?php
         
+        //BUTTON ADMIN
         if($currentUser->getIsAdmin()==1)
         {
 ?>
             <a href="administration.php">Administration</a>
 <?php
         }
-        
-        /*
-        ?>
-        
-        <form method="POST" action="modifAvatar.php">
+        //BOX MODIFIER AVATAR
+?>
+        <form method="POST" action="modifAvatar.php" enctype="multipart/form-data">
             <label>Modification de l'avatar : </label>
-            <input type="hidden" name="idUser" value="<?php $currentUser->getIdUser(); ?>"/>
-            <input type="image" name="avatar" value="<?php if"
-        </form>
-        
-        <form method="POST" action="modifProfil.php" enctype="multipart/form-data">
+            <input type="hidden" name="idUser" value="<?php echo $currentUser->getIdUser(); ?>"/>
             <input type="file" name="newAvatar"/>
-            <input type="submit" value="Valider"
+            <input type="submit" name="upload" value="Valider"/>
         </form>
 <?php
-        */
+        
               
     }
     

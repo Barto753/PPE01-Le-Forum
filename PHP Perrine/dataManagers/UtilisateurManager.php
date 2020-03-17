@@ -2,7 +2,7 @@
 
     include_once("DatabaseLinker.php");
     include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Utilisateur.php");
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Bannissement.php");
+;
     
     class UtilisateurManager
     {
@@ -36,12 +36,25 @@
             $state->execute();
         }
         
+        public static function updateAvatar($user)
+        {
+            $connex = DatabaseLinker::getConnexion();
+            
+            $newAvatar = $user->getCheminAvatar();
+            $idUser = $user->getIdUser();
+            
+            $state=$connex->prepare("UPDATE Utilisateur SET cheminAvatar=? WHERE idUser=?");
+            $state->bindParam(1,$newAvatar);
+            $state->bindParam(2,$idUser);
+            
+            $state->execute();
+        }
         
         public static function insertUser($user)
         {
             $connex = DatabaseLinker::getConnexion();
                     
-            $state=$connex->prepare("INSERT INTO Utilisateur(pseudo, email, cheminAvatar, password, isAdmin, isConnected) VALUES (?, ?, ?, ?, ?, ?)");
+            $state=$connex->prepare("INSERT INTO Utilisateur(pseudo, email, cheminAvatar, password, isAdmin, isConnected, isBanned, motifBan, dateFinBan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             
             $pseudo = $user->getPseudo();
             $email = $user->getEmail();
@@ -49,6 +62,9 @@
             $chemin = $user->getCheminAvatar();
             $isAdmin = $user->getIsAdmin();
             $isConnected = $user->getIsConnected();
+            $isBanned = $user->getIsBanned();
+            $motifBan = $user->getMotifBan();
+            $dateFinBan = $user->getDateFinBan();
             
             $state->bindParam(1,$pseudo);
             $state->bindParam(2,$email);
@@ -56,6 +72,9 @@
             $state->bindParam(4,$password);
             $state->bindParam(5,$isAdmin);
             $state->bindParam(6,$isConnected);
+            $state->bindParam(7,$isBanned);
+            $state->bindParam(8,$motifBan);
+            $state->bindParam(9,$dateFinBan);
             
             $state->execute();           
         }
@@ -82,6 +101,9 @@
                 $user->setPassword($resultUser["password"]);
                 $user->setIsAdmin($resultUser["isAdmin"]);
                 $user->setIsConnected($resultUser["isConnected"]);
+                $user->setIsBanned($resultUser["isBanned"]);
+                $user->setMotifBan($resultUser["motifBan"]);
+                $user->setDateFinBan($resultUser["dateFinBan"]);
             }
             
             return $user;
@@ -109,6 +131,9 @@
                 $user->setPassword($resultUser["password"]);
                 $user->setIsAdmin($resultUser["isAdmin"]);
                 $user->setIsConnected($resultUser["isConnected"]);
+                $user->setIsBanned($resultUser["isBanned"]);
+                $user->setMotifBan($resultUser["motifBan"]);
+                $user->setDateFinBan($resultUser["dateFinBan"]);
             }
             
             return $user;
@@ -133,51 +158,25 @@
             return $tabUsers;
         }
         
-        public static function updateBannissement()
-        {
-            
-        }
-        
-        public static function findBannissement($idUser)
+        public static function updateBannissement($user)
         {
             $connex = DatabaseLinker::getConnexion();
-            $banni=null;
-            $state=$connex->prepare("SELECT * FROM Bannissement WHERE idUser=?");
-            $state->bindParam(1,$idUser);
+            
+            $idUser = $user->getIdUser();
+            $isBanned = $user->getIsBanned();
+            $motifBan = $user->getMotifBan();
+            $dateFinBan = $user->getDateFinBan();
+            
+            $state=$connex->prepare("UPDATE Utilisateur SET isBanned=?, motifBan=?, dateFinBan=?  WHERE idUser=?");
+            
+            $state->bindParam(1, $isBanned);
+            $state->bindParam(2, $motifBan);
+            $state->bindParam(3, $dateFinBan);
+            $state->bindParam(4, $idUser);
             
             $state->execute();
-                        
-            $resultatsBannis=$state->fetchAll();
-                    
-            if(sizeof($resultatsBannis)>0)
-            {
-                $resultBanni=$resultatsBannis[0];
-                $banni = new Bannissement(); 
-                $banni->setIdBannissement($resultBanni["idBannissement"]);
-                $banni->setMotif($resultBanni["motif"]);
-                $banni->setDateFin($resultBanni["dateFin"]);
-                $banni->setIdUser($resultBanni["idUser"]);
-            }
-            
-            return $banni;
         }
         
-        public static function insertBannissement($banni) //Mettre dans BannissementManager.php ???
-        {
-            $connex = DatabaseLinker::getConnexion();
-                    
-            $state=$connex->prepare("INSERT INTO Bannissement(dateFin, motif, idUser) VALUES (?, ?, ?)");
-            
-            $dateFin = $banni->getDateFin();
-            $motif = $banni->getMotif();
-            $idUser = $banni->getIdUser();
-            
-            $state->bindParam(1,$dateFin);
-            $state->bindParam(2,$motif);
-            $state->bindParam(3,$idUser);
-            
-            $state->execute();           
-        }
         
     }
 

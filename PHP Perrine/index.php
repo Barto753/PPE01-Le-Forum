@@ -83,10 +83,17 @@
             {
                 echo "bonjour le post pseudo a été trouvé dans la bdd + mdp";
                 $user = UtilisateurManager::findUser($_POST["pseudo"]);
-                $user->setIsConnected(1);
-                UtilisateurManager::updateConnexion($user);
-                //on set le parametre login de la session avec le pseudo du user connecté
-                $_SESSION["login"]=$_POST["pseudo"];
+                if($user->getIsBanned()==0)
+                {
+                    $user->setIsConnected(1);
+                    UtilisateurManager::updateConnexion($user);
+                    //on set le parametre login de la session avec le pseudo du user connecté
+                    $_SESSION["login"]=$_POST["pseudo"];
+                }
+                else 
+                {
+                    echo "VOUS AVEZ ETE BANNI JUSQU'AU".$user->getDateFinBan();
+                }
             }
             else
             {
@@ -135,8 +142,8 @@
         if($user->getIsConnected()==1)
         {
 ?>
-            <div class="icone-profil">
-                <a href="profil.php">
+            <div class="account-icone">
+                <a href="account.php">
                 <img src="images/style-one-pin-user.png" alt="logo-avatar">
                 <input type="hidden" name="idUser" value="<?php $user->getIdUser();?>">
                 </a>

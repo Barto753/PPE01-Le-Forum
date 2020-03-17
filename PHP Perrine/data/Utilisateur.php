@@ -9,6 +9,34 @@
         private $password;
         private $isAdmin;
         private $isConnected;
+        private $isBanned;
+        private $dateFinBan;
+        private $motifBan;
+        
+
+        function getIsBanned() {
+            return $this->isBanned;
+        }
+
+        function getDateFinBan() {
+            return $this->dateFinBan;
+        }
+
+        function getMotifBan() {
+            return $this->motifBan;
+        }
+
+        function setIsBanned($isBanned) {
+            $this->isBanned = $isBanned;
+        }
+
+        function setDateFinBan($dateFinBan) {
+            $this->dateFinBan = $dateFinBan;
+        }
+
+        function setMotifBan($motifBan) {
+            $this->motifBan = $motifBan;
+        } 
         
         function getIdUser() 
         {

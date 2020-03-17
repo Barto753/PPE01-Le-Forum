@@ -58,9 +58,12 @@
             $user->setPseudo($_POST["pseudo1"]);
             $user->setEmail($_POST["email1"]);
             $user->setPassword($_POST["password1"]);
-            $user->setCheminAvatar("null");
+            $user->setCheminAvatar("single-man-circle.png");
             $user->setIsAdmin(0);
             $user->setIsConnected(0);
+            $user->setIsBanned(0);
+            $user->setMotifBan("null");
+            $user->setDateFinBan("2000-01-01");
             
             UtilisateurManager::insertUser($user);
             

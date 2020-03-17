@@ -143,7 +143,7 @@
                         {
                             /*if(isset($_POST["texteMessage"])) //affichage de la date de la modofication du message marche pas
                             {
-                                echo "modifié le ".date("Y-m-d");
+                                echo time(date('Y/m/d H:i:s'));
                             }*/
                             
                             //BOX MODIFIER MESSAGE
@@ -151,6 +151,7 @@
                             <form method="POST" action="modifMsg.php">
                                 <input type="hidden" name="idDiscussion" value="<?php echo $message->getIdDiscussion(); ?>"/>
                                 <input type="hidden" name="idMessage" value="<?php echo $message->getIdMessage(); ?>"/>
+                                <input type="hidden" name="dateModif" value="<?php echo time(date('Y/m/d H:i:s'));?>"/>
                                 <input type="text" name="texteMessage" placeholder="Contenu"/>
                                 <button type="submit">Modifier</button> 
                             </form>  

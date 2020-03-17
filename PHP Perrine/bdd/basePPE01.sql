@@ -5,14 +5,6 @@ CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE bdd_forum;
 
-
-CREATE TABLE IF NOT EXISTS Bannissement(
-idBannissement INT AUTO_INCREMENT,
-motif VARCHAR(64),
-dateFin DATE,
-idUser INT,
-PRIMARY KEY(idBannissement));
-
 CREATE TABLE IF NOT EXISTS Utilisateur(
 idUser INT AUTO_INCREMENT,  
 pseudo VARCHAR(64),  
@@ -21,6 +13,9 @@ cheminAvatar VARCHAR(64),
 password VARCHAR(64),
 isAdmin TINYINT,
 isConnected TINYINT,
+isBanned TINYINT,
+motifBan VARCHAR(64),
+dateFinBan DATETIME,
 PRIMARY KEY(idUser));
 
 CREATE TABLE IF NOT EXISTS Message(
@@ -67,16 +62,11 @@ ADD CONSTRAINT Discussion_idUser
 FOREIGN KEY (idUser)
 REFERENCES Utilisateur(idUser);
 
-ALTER TABLE Bannissement
-ADD CONSTRAINT Bannissement_idUser
-FOREIGN KEY (idUser)
-REFERENCES Utilisateur(idUser);
-
-INSERT INTO Utilisateur(pseudo, email, cheminAvatar, password, isAdmin, isConnected) VALUES
-("michel", "michel@mail.fr", "null", "1234", 0, 0),
-("hubert59", "hubert59@mail.fr", "null", "5678", 0, 0),
-("pingu", "pingu@mail.fr", "null", "AZERTY", 1, 0),
-("q63", "q63@mail.fr", "null", "WXCVBN", 1, 0);
+INSERT INTO Utilisateur(pseudo, email, cheminAvatar, password, isAdmin, isConnected, isBanned, motifBan, dateFinBan) VALUES
+("michel", "michel@mail.fr", "null", "1234", 0, 0, 0, "null", "2000-01-01"),
+("hubert59", "hubert59@mail.fr", "null", "5678", 0, 0, 0, "null", "2000-01-01"),
+("pingu", "pingu@mail.fr", "null", "AZERTY", 1, 0, 0, "null", "2000-01-01"),
+("q63", "q63@mail.fr", "null", "WXCVBN", 1, 0, 0, "null", "2000-01-01");
 
 INSERT INTO CategorieDiscussion(nomCategorie) VALUES
 ("Chien"),
@@ -105,6 +95,3 @@ INSERT INTO Message(texteMessage, dateMessage, idUser, idDiscussion) VALUES
 ("Pas plus de 5/6 ans.", "2019-06-19", 1, 6),
 ("De quelle race es ton hamster ?", "2019-10-08", 3, 6);
 
-
-INSERT INTO Bannissement(dateFin, motif, idUser) VALUES
-("2020-03-17", "insultes", 2);
