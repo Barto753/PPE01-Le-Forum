@@ -5,13 +5,11 @@
     include_once("dataManagers/UtilisateurManager.php");
     include_once("data/Utilisateur.php");
     
-    
-    
+
     if(isset($_SESSION["login"]))
     {
         
         date_default_timezone_set('Europe/Paris');
-        //echo $user->getIdUser();
         
         $user = UtilisateurManager::findUserWithId($_POST["idUser"]);
         

@@ -56,7 +56,6 @@
                     if($discussion->getIsClosed()==0)
                     {
 ?>
-                
                         <form method="POST" action="updateIsClosedDiscu.php">
                             <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
                             <input type="hidden" name="isClosed" value="<?php echo $discussion->getIsClosed(); ?>"/>
@@ -85,6 +84,7 @@
         <div class="discussion-date"><?php echo "Créé le ".$discussion->getDateDiscussion(); ?></div>
         <div class="discussion-texte"><?php echo "Texte: ".$discussion->getTexteDiscussion(); ?></div>
         <div class="discussion-user"><?php echo "Par ".$user->getPseudo(); ?></div>
+        <img class="discussion-avatar" src="images/<?php echo $user->getCheminAvatar();?>"/>
         <div class="message-nombre"><?php echo "Messages (".sizeof($tabMessages).")"; ?></div>
 <?php 
         //AFFICHAGE BOX NEW MESSAGE

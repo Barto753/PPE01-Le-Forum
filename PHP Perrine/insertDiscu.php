@@ -8,6 +8,7 @@
     
     if(!empty($_POST["idUser"]) && !empty($_POST["titreDiscussion"]) && !empty($_POST["texteDiscussion"]))
     {
+        
         if($_POST["categorie-discussion"]==("Chien"))
         {
             $discussion = new Discussion();

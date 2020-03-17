@@ -15,29 +15,28 @@
     unset($_SESSION["login"]);*/
     
     
-    
     //si le bouton de deconnexion a renvoyé true
     if(!empty($_GET["deco"]) && $_GET["deco"]==true)
     {
         $updateUser = false;
-        echo "bonjour deco=true";
+        //echo "bonjour deco=true";
         
         if(isset($_SESSION["login"]))
         {
             $user = UtilisateurManager::findUser($_SESSION["login"]);
             $user->setIsConnected(0);
             UtilisateurManager::updateConnexion($user);
-            echo "bonjour session login est defini";
+            //echo "bonjour session login est defini";
             if($user->getIsConnected()==0)
             {
-                echo "bonjour isconnected=0";
+                //echo "bonjour isconnected=0";
                 $updateUser = true;
             }
         }  
         
         if($updateUser==true)
         {
-            echo "bonjour updateuser=true";
+            //echo "bonjour updateuser=true";
             session_unset();
             session_destroy();
             unset($_SESSION["login"]); 
@@ -77,11 +76,11 @@
         //DOUBLE VERIF
         if(!empty($_POST["pseudo"]) && !empty($_POST["password"]))
         {
-            echo "bonjour post de pseudo et password sont remplis";
+            //echo "bonjour post de pseudo et password sont remplis";
             //si le user est dans la bdd avec un pseudo qui correspond au password
             if(ConnexionManager::testConnexionUser($_POST["pseudo"])==true)
             {
-                echo "bonjour le post pseudo a été trouvé dans la bdd + mdp";
+                //echo "bonjour le post pseudo a été trouvé dans la bdd + mdp";
                 $user = UtilisateurManager::findUser($_POST["pseudo"]);
                 if($user->getIsBanned()==0)
                 {
@@ -97,7 +96,7 @@
             }
             else
             {
-                echo "bonjour le post pseudo ou mdp n'a pas été trouvé dans bdd";
+                //echo "bonjour le post pseudo ou mdp n'a pas été trouvé dans bdd";
                 echo "Pseudo ou mot de passe erroné, veuillez vous inscrire.";
             }
         }
@@ -107,7 +106,7 @@
     //NON CONNECTE
     if(!isset($_SESSION["login"]))//&& !empty($_POST)
     {
-        echo "bonjour session login n'est pas defini";
+        //echo "bonjour session login n'est pas defini";
 ?>
         <div class="inscription-button">
             <form action="inscription.php">
@@ -130,7 +129,7 @@
     //si le login de la session existe bien 
     if(isset($_SESSION["login"]))
     {
-        echo "bonjour session login est defini";
+        //echo "bonjour session login est defini";
 ?>
         
         <a href="index.php?deco=true">Déconnexion</a>
@@ -149,7 +148,7 @@
                 </a>
             </div>
 <?php
-            echo "bonjour isconnected du user = 1";
+            //echo "bonjour isconnected du user = 1";
             //AFICHAGE BOX NOUVELLE DISCUSSION
 ?>
             

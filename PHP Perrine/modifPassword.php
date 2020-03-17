@@ -25,7 +25,6 @@
         
         /*header('Location: account.php');
         exit;*/
-        
     }
     
     include_once("include/footer.php");

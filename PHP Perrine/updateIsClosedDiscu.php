@@ -13,21 +13,15 @@
         {
             $discussion->setIsClosed(1);
             $discussion = DiscussionManager::updateIsClosedDiscussion($discussion);
-            
-            header('Location: sujet'.$idCategorie.'.php');
-            exit;
         }
         else if($_POST["isClosed"]==1)
         {
             $discussion->setIsClosed(0);
             $discussion = DiscussionManager::updateIsClosedDiscussion($discussion);
-            
-            header('Location: sujet'.$idCategorie.'.php');
-            exit;
         }
      
-        /*header('Location: sujet'.$idCategorie.'.php');
-        exit;*/
+        header('Location: sujet'.$idCategorie.'.php');
+        exit;
     }
     
     include_once("include/footer.php");
