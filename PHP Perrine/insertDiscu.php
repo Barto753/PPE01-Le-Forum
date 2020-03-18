@@ -3,51 +3,26 @@
     
     include_once("dataManagers/DiscussionManager.php");
     include_once("data/Discussion.php");
+    include_once("dataManagers/CategorieManager.php");
     
     date_default_timezone_set('Europe/Paris');
     
-    if(!empty($_POST["idUser"]) && !empty($_POST["titreDiscussion"]) && !empty($_POST["texteDiscussion"]))
+    if(!empty($_POST["idUser"]) && !empty($_POST["titreDiscussion"]) && !empty($_POST["texteDiscussion"]) && !empty($_POST["idCategorie"]))
     {
-        
-        if($_POST["categorie-discussion"]==("Chien"))
-        {
-            $discussion = new Discussion();
-            $discussion->setTitreDiscussion($_POST["titreDiscussion"]);
-            $discussion->setTexteDiscussion($_POST["texteDiscussion"]);
-            $discussion->setDateDiscussion(date("Y-m-d"));
-            $discussion->setIsClosed(0);
-            $discussion->setIdCategorie(1);
-            $discussion->setIdUser($_POST["idUser"]);
-            DiscussionManager::insertDiscussion($discussion);
-            header('Location: sujet1.php');
-            exit;
-        }
-        else if($_POST["categorie-discussion"]==("Chat"))
-        {
-            $discussion = new Discussion();
-            $discussion->setTitreDiscussion($_POST["titreDiscussion"]);
-            $discussion->setTexteDiscussion($_POST["texteDiscussion"]);
-            $discussion->setDateDiscussion(date("Y-m-d"));
-            $discussion->setIsClosed(0);
-            $discussion->setIdCategorie(2);
-            $discussion->setIdUser($_POST["idUser"]);
-            DiscussionManager::insertDiscussion($discussion);
-            header('Location: sujet2.php');
-            exit;
-        }
-        else if($_POST["categorie-discussion"]==("Rongeur"))
-        {
-            $discussion = new Discussion();
-            $discussion->setTitreDiscussion($_POST["titreDiscussion"]);
-            $discussion->setTexteDiscussion($_POST["texteDiscussion"]);
-            $discussion->setDateDiscussion(date("Y-m-d"));
-            $discussion->setIsClosed(0);
-            $discussion->setIdCategorie(3);
-            $discussion->setIdUser($_POST["idUser"]);
-            DiscussionManager::insertDiscussion($discussion);
-            header('Location: sujet3.php');
-            exit;
-        }
+        $categorie = CategorieManager::findCategorie($_POST["idCategorie"]);
+        $idCategorie = $categorie->getIdCategorie();
+
+        $discussion = new Discussion();
+        $discussion->setTitreDiscussion($_POST["titreDiscussion"]);
+        $discussion->setTexteDiscussion($_POST["texteDiscussion"]);
+        $discussion->setDateDiscussion(date("Y-m-d"));
+        $discussion->setIsClosed(0);
+        $discussion->setIdCategorie($idCategorie);
+        $discussion->setIdUser($_POST["idUser"]);
+        DiscussionManager::insertDiscussion($discussion);
+
+        header('Location: sujet.php?idCateg='.$idCategorie);
+        exit;
     }
     
     

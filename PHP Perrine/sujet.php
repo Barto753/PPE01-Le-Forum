@@ -26,7 +26,7 @@
     }
     
     //AFFICHAGE DISCUSSIONS
-    $idCategorie = 2;
+    $idCategorie = $_GET["idCateg"];
     $tabDiscussions = CategorieManager::getDiscussions($idCategorie);
     $categorie = CategorieManager::findCategorie($idCategorie);
     $user = new Utilisateur();
@@ -56,7 +56,6 @@
                     if($discussion->getIsClosed()==0)
                     {
 ?>
-                
                         <form method="POST" action="updateIsClosedDiscu.php">
                             <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
                             <input type="hidden" name="isClosed" value="<?php echo $discussion->getIsClosed(); ?>"/>
@@ -85,6 +84,7 @@
         <div class="discussion-date"><?php echo "Créé le ".$discussion->getDateDiscussion(); ?></div>
         <div class="discussion-texte"><?php echo "Texte: ".$discussion->getTexteDiscussion(); ?></div>
         <div class="discussion-user"><?php echo "Par ".$user->getPseudo(); ?></div>
+        <img class="discussion-avatar" src="images/<?php echo $user->getCheminAvatar();?>"/>
         <div class="message-nombre"><?php echo "Messages (".sizeof($tabMessages).")"; ?></div>
 <?php 
         //AFFICHAGE BOX NEW MESSAGE
@@ -132,6 +132,7 @@
 <?php
                 }
             }
+            //AFFICHAGE MESSAGES
 ?>
             <div class="message-container">
                 <div class="message-user"><?php echo "de ".$user->getPseudo(); ?></div>
@@ -143,7 +144,7 @@
                         {
                             /*if(isset($_POST["texteMessage"])) //affichage de la date de la modofication du message marche pas
                             {
-                                echo "modifié le ".date("Y-m-d");
+                                echo time(date('Y/m/d H:i:s'));
                             }*/
                             
                             //BOX MODIFIER MESSAGE
@@ -151,6 +152,7 @@
                             <form method="POST" action="modifMsg.php">
                                 <input type="hidden" name="idDiscussion" value="<?php echo $message->getIdDiscussion(); ?>"/>
                                 <input type="hidden" name="idMessage" value="<?php echo $message->getIdMessage(); ?>"/>
+                                <input type="hidden" name="dateModif" value="<?php echo time(date('Y/m/d H:i:s'));?>"/>
                                 <input type="text" name="texteMessage" placeholder="Contenu"/>
                                 <button type="submit">Modifier</button> 
                             </form>  

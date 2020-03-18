@@ -150,6 +150,7 @@
 <?php
             //echo "bonjour isconnected du user = 1";
             //AFICHAGE BOX NOUVELLE DISCUSSION
+            $tabCategories = CategorieManager::findAllCategories();
 ?>
             
             <div class="new-discussion-container">  
@@ -157,18 +158,22 @@
                 <form method="POST" action="insertDiscu.php">
                     <div class="new-discussion-liste">
                         <SELECT name="categorie-discussion" size="1">
-                            <option>Chien
-                            <option>Chat
-                            <option>Rongeur
+                            <?php
+                            foreach ($tabCategories as $categorie)
+                            {
+                                echo "<option>".$categorie->getNomCategorie();
+                            }
+                            ?>
                         </SELECT>
                     </div>
                     <div class="new-discussion-titre">
                         <input type="text" name="titreDiscussion" placeholder="Titre de la nouvelle discussion"/>
                     </div>
                     <div class="new-discussion-contenu">
-                        <input type="text" name="texteDiscussion" placeholder="Contenu" style="width: 100%; height: 100%"/> <?php //<textarea> plusieurs lignes </textarea> ?>
+                        <textarea rows="10" cols="30" name="texteDiscussion" placeholder="Contenu" style="width: 100%; height: 100%"></textarea> <?php //<textarea> plusieurs lignes </textarea> ?>
                     </div>
                     <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
+                    <input type="hidden" name="idCategorie" value="<?php echo $categorie->getIdCategorie(); ?>"/>
                     <div class="new-discussion-button">
                         <button type="submit">Créer</button>
                     </div>
@@ -181,7 +186,7 @@
     
     
 //AFFICHAGE CATEGORIES
-    $tabCategories = CategorieManager::findAllCategories();
+    //$tabCategories = CategorieManager::findAllCategories();
 ?>
     <div class="categorie-container">
         <div class="sujet-titre">SUJETS</div>
@@ -192,8 +197,10 @@
 ?>
         <div class="categorie-nom">
             <img src="images/folder.png"  alt="icone-dossier-categorie">
-            <a href='sujet<?php echo $categorie->getIdCategorie().".php?"; ?>'> <?php echo $categorie->getNomCategorie()?> </a> 
+            <a href='sujet.php?idCateg=<?php echo $categorie->getIdCategorie(); ?>'> <?php echo $categorie->getNomCategorie()?> </a> 
         </div>
+        
+
 <?php
     }
     ?>

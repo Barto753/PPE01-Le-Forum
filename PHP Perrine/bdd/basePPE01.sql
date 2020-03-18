@@ -63,15 +63,20 @@ FOREIGN KEY (idUser)
 REFERENCES Utilisateur(idUser);
 
 INSERT INTO Utilisateur(pseudo, email, cheminAvatar, password, isAdmin, isConnected, isBanned, motifBan, dateFinBan) VALUES
-("michel", "michel@mail.fr", "null", "1234", 0, 0, 0, "null", "2000-01-01"),
-("hubert59", "hubert59@mail.fr", "null", "5678", 0, 0, 0, "null", "2000-01-01"),
-("pingu", "pingu@mail.fr", "null", "AZERTY", 1, 0, 0, "null", "2000-01-01"),
-("q63", "q63@mail.fr", "null", "WXCVBN", 1, 0, 0, "null", "2000-01-01");
+("Michel", "michel@mail.fr", "null", "1234", 0, 0, 0, "null", "2000-01-01"),
+("Hub_59", "hubert59@mail.fr", "null", "5678", 0, 0, 0, "null", "2000-01-01"),
+("Pingu", "pingu@mail.fr", "null", "AZERTY", 1, 0, 0, "null", "2000-01-01"),
+("Q63", "q63@mail.fr", "null", "WXCVBN", 1, 0, 0, "null", "2000-01-01"),
+("MlleLola", "mlola@mail.fr", "null", "h3ll0", 0, 0, 0, "null", "2000-01-01");
 
 INSERT INTO CategorieDiscussion(nomCategorie) VALUES
 ("Chien"),
 ("Chat"),
-("Rongeur");
+("Rongeur"),
+("Oiseau"),
+("Reptile"),
+("Cheval")
+("Poisson");
 
 INSERT INTO Discussion(titreDiscussion, texteDiscussion, dateDiscussion, isClosed, idCategorie, idUser) VALUES
 ("Nourrir son chiot", "Que donner à manger à un chiot ?", "2018-06-10", 0, 1, 1),

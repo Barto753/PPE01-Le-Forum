@@ -10,15 +10,12 @@
     <div class="inscription-box-titre"> Inscription </div>
 
     <form method="POST" action="inscription.php">
-
-        
-        <input type="text" id="idPseudo1" name="pseudo1" placeholder="pseudo"/>
-        
-        <input type="text" id="idEmail1" name="email1" placeholder="email"/>
-        
-        <input type="password" id="idPassword1" name="password1" placeholder="mot de passe"/>
+        <input type="text" name="pseudo" placeholder="Pseudo"/>
+        <input type="text" name="email" placeholder="Email"/>
+        <input type="password" name="password" placeholder="Mot de passe"/>
+        <input type="radio" name="genre" value="femme"> Femme
+        <input type="radio" name="genre" value="homme"> Homme
         <input type="submit" value="Valider"/>
-
     </form> 
        
 </div>
@@ -30,19 +27,24 @@
     //on verfifie si tous les champs sont remplis
     if(!empty($_POST))
     {
-        if(empty($_POST["pseudo1"]))
+        if(empty($_POST["pseudo"]))
         {
-            $tabErreurs["pseudo1"]= "Veuillez saisir un pseudo.";
+            $tabErreurs["pseudo"]= "Veuillez saisir un pseudo.";
         }
         
-        if(empty($_POST["email1"]))
+        if(empty($_POST["email"]))
         {
-            $tabErreurs["email1"]= "Veuillez saisir un email.";
+            $tabErreurs["email"]= "Veuillez saisir un email.";
         }
         
-        if(empty($_POST["password1"]))
+        if(empty($_POST["password"]))
         {
-            $tabErreurs["password1"]= "Veuillez saisir un mot de passe.";
+            $tabErreurs["password"]= "Veuillez saisir un mot de passe.";
+        }
+        
+        if(empty($_POST["genre"]))
+        {
+            $tabErreurs["genre"]= "Veuillez sélectionner un genre.";
         }
         
         foreach($tabErreurs as $error)
@@ -55,10 +57,17 @@
         {
             $user = new Utilisateur();
 
-            $user->setPseudo($_POST["pseudo1"]);
-            $user->setEmail($_POST["email1"]);
-            $user->setPassword($_POST["password1"]);
-            $user->setCheminAvatar("single-man-circle.png");
+            $user->setPseudo($_POST["pseudo"]);
+            $user->setEmail($_POST["email"]);
+            $user->setPassword($_POST["password"]);
+            if($_POST["genre"]=="homme")
+            {
+                $user->setCheminAvatar("single-man-circle.png");
+            }
+            else if($_POST["genre"]=="femme")
+            {
+                $user->setCheminAvatar("single-woman-circle.png");
+            }
             $user->setIsAdmin(0);
             $user->setIsConnected(0);
             $user->setIsBanned(0);
@@ -67,15 +76,14 @@
             
             UtilisateurManager::insertUser($user);
             
-            if(UtilisateurManager::findUser($_POST["pseudo1"])!=null)
+            if(UtilisateurManager::findUser($_POST["pseudo"])!=null)
             {
-                echo "Inscription réussie";
+                //echo "Inscription réussie";
                 header('Location: index.php');
                 exit;
             }
         }
     }
     
-    
-    include("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/include/footer.php")
+    include("include/footer.php")
 ?>
