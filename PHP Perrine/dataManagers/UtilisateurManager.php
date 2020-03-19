@@ -10,12 +10,10 @@
         {
             $connex = DatabaseLinker::getConnexion();
             
-            //$cheminAvatar = $user->getCheminAvatar();
             $password = $user->getPassword();
             $idUser = $user->getIdUser();
             
             $state=$connex->prepare("UPDATE Utilisateur SET password=? WHERE idUser=?");
-            //$state->bindParam(1,$cheminAvatar);
             $state->bindParam(1, $password);
             $state->bindParam(2, $idUser);
             
@@ -48,6 +46,28 @@
             $state->bindParam(2,$idUser);
             
             $state->execute();
+        }
+        
+        public static function verifBanIsOver($user)
+        {
+            //verifier si la dateFinBan est > currentDate
+            $currentDate = date("Y-m-d H:i:s");
+            $dateFinBan = $user->getDateFinBan();
+            
+            //$currentDate = newDateTime($currentDate);
+            $currentDate = $currentDate->format('YmdHis');
+            //$dateFinBan = newDateTime($dateFinBan);
+            $dateFinBan = $dateFinBan->format('YmdHis');
+            
+            //20200319 132955
+            //20200319 164501
+            $banIsOver = 0;
+            if($dateFinBan > $currentDate)
+            {
+                $banIsOver = 1;
+            }
+            
+            return $banIsOver;
         }
         
         public static function insertUser($user)
@@ -83,6 +103,7 @@
         {
             $connex = DatabaseLinker::getConnexion();
             $user=null;
+            
             $state=$connex->prepare("SELECT * FROM Utilisateur WHERE pseudo=?");
             $state->bindParam(1,$pseudo);
             
@@ -155,6 +176,7 @@
                 $user = UtilisateurManager::findUserWithId($result["idUser"]);
                 $tabUsers[] = $user;
             }
+            
             return $tabUsers;
         }
         

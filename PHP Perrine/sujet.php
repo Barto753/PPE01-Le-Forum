@@ -100,6 +100,7 @@
                         <input type="text" name="texteMsg" placeholder="Contenu"/> <?php //texteMsg => texteMessage ? ?>
                     </div>
                         <input type="hidden" name="idUser" value="<?php echo $currentUser->getIdUser(); ?>"/>
+                        <input type="hidden" name="idCategorie" value="<?php echo $idCategorie;?>"/>
                         <input type="hidden" name="nomCategorie" value="<?php echo $categorie->getNomCategorie(); ?>"/>
                         <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
                     <div class="new-discussion-button">
@@ -124,6 +125,7 @@
 ?>        
                     <form method="POST" action="deleteMsg.php">
                         <input type="hidden" name="idDiscussion" value="<?php echo $message->getIdDiscussion(); ?>"/>
+                        <input type="hidden" name="idCategorie" value="<?php echo $idCategorie;?>"/>
                         <input type="hidden" name="idMessage" value="<?php echo $message->getIdMessage() ;?>"/>
                         <button type="submit">Supprimer</button> 
                     </form>
@@ -152,7 +154,7 @@
                             <form method="POST" action="modifMsg.php">
                                 <input type="hidden" name="idDiscussion" value="<?php echo $message->getIdDiscussion(); ?>"/>
                                 <input type="hidden" name="idMessage" value="<?php echo $message->getIdMessage(); ?>"/>
-                                <input type="hidden" name="dateModif" value="<?php echo time(date('Y/m/d H:i:s'));?>"/>
+                                <!-- <input type="hidden" name="dateModif" value="<?php echo time(date('Y/m/d H:i:s'));?>"/> -->
                                 <input type="text" name="texteMessage" placeholder="Contenu"/>
                                 <button type="submit">Modifier</button> 
                             </form>  

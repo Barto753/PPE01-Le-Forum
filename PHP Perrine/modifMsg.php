@@ -16,7 +16,8 @@
         $idCategorie=$discussion->getIdCategorie();
         
         MessageManager::modifMessage($message);
-        header('Location: sujet'.$idCategorie.'.php');
+        
+        header('Location: sujet.php?idCateg='.$idCategorie);
         exit;
     }
     

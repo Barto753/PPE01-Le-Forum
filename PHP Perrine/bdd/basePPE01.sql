@@ -21,7 +21,7 @@ PRIMARY KEY(idUser));
 CREATE TABLE IF NOT EXISTS Message(
 idMessage INT AUTO_INCREMENT,
 texteMessage TEXT,
-dateMessage DATE,
+dateMessage DATETIME,
 idUser INT,
 idDiscussion INT,
 PRIMARY KEY(idMessage));
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS Discussion(
 idDiscussion INT AUTO_INCREMENT,
 titreDiscussion VARCHAR(64),
 texteDiscussion TEXT,
-dateDiscussion DATE,
+dateDiscussion DATETIME,
 isClosed TINYINT,
 idCategorie INT,
 idUser INT,

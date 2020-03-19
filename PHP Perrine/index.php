@@ -11,8 +11,7 @@
     include_once("dataManagers/CategorieManager.php");
 
     /*session_unset();
-    session_destroy();
-    unset($_SESSION["login"]);*/
+    session_destroy();*/
     
     
     //si le bouton de deconnexion a renvoyé true
@@ -82,10 +81,17 @@
             {
                 //echo "bonjour le post pseudo a été trouvé dans la bdd + mdp";
                 $user = UtilisateurManager::findUser($_POST["pseudo"]);
-                if($user->getIsBanned()==0)
+                
+                if($user->getIsBanned()==0 || verifBanIsOver($user)==1)
                 {
                     $user->setIsConnected(1);
                     UtilisateurManager::updateConnexion($user);
+                    
+                    $user->setIsBanned(0);
+                    $user->setDateFinBan("2000-01-01");
+                    $user->setMotifBan("null"); 
+                    UtilisateurManager::updateBannissement($user);
+                    
                     //on set le parametre login de la session avec le pseudo du user connecté
                     $_SESSION["login"]=$_POST["pseudo"];
                 }
@@ -125,7 +131,7 @@
         </div>
 <?php
     }
-    
+    $tabCategories = CategorieManager::findAllCategories();
     //si le login de la session existe bien 
     if(isset($_SESSION["login"]))
     {
@@ -137,7 +143,7 @@
         echo "Vous êtes connecté en tant que ".$_SESSION["login"];
         $user = UtilisateurManager::findUser($_SESSION["login"]);
         //echo $user->getPseudo();
-
+        
         if($user->getIsConnected()==1)
         {
 ?>
