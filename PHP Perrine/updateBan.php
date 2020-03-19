@@ -14,8 +14,7 @@
         $user = UtilisateurManager::findUserWithId($_POST["idUser"]);
         
         if(empty($_POST["motifBan"]) && empty($_POST["duree-bannissement"]) && empty($_POST["isBanned"]))
-        {
-            
+        {       
 ?>
             <form method="POST" action="updateBan.php">
                 <SELECT name="duree-ban" size="1">
@@ -30,7 +29,6 @@
             </form>
 <?php
         }
-        
         
         if(!empty($_POST["duree-ban"]) && !empty($_POST["motifBan"]) && !empty($_POST["idUser"]))
         {

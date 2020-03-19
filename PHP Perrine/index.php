@@ -48,28 +48,29 @@
     $user = null;
     //si qqch est rentré dans le form mais qu'il manque un champ 
     //NON CONNECTE + FORM MAL REMPLI + AFFICHE ERREURS
-    $tabErreurs=array();
+    $tabErreursConnexion=array();
+    
     if(!empty($_POST))
     {
         if(empty($_POST["pseudo"]))
         {
-            $tabErreurs["pseudo"]= "Veuillez saisir un pseudo.";
+            $tabErreursConnexion["pseudo"]= "Veuillez saisir un pseudo.";
         }
 
         if(empty($_POST["password"]))
         {
-            $tabErreurs["password"]= "Veuillez saisir un mot de passe.";
+            $tabErreursConnexion["password"]= "Veuillez saisir un mot de passe.";
         }
 
-        foreach($tabErreurs as $error)
+        foreach($tabErreursConnexion as $errorCo)
         {
-            echo $error;
+            echo $errorCo;
         }
     }
     
     
     //s'il n'y a pas eu d'erreurs dans le form
-    if(empty($tabErreurs))
+    if(empty($tabErreursConnexion))
     {
         //si pseudo et password du form ne sont pas vides
         //DOUBLE VERIF
@@ -82,7 +83,7 @@
                 //echo "bonjour le post pseudo a été trouvé dans la bdd + mdp";
                 $user = UtilisateurManager::findUser($_POST["pseudo"]);
                 
-                if($user->getIsBanned()==0 || verifBanIsOver($user)==1)
+                if($user->getIsBanned()==0 || UtilisateurManager::verifBanIsOver($user)==1)
                 {
                     $user->setIsConnected(1);
                     UtilisateurManager::updateConnexion($user);
@@ -97,7 +98,7 @@
                 }
                 else 
                 {
-                    echo "VOUS AVEZ ETE BANNI JUSQU'AU".$user->getDateFinBan();
+                    echo "VOUS AVEZ ETE BANNI JUSQU'AU ".$user->getDateFinBan();
                 }
             }
             else
@@ -172,44 +173,35 @@
                             ?>
                         </SELECT>
                     </div>
-                    <div class="new-discussion-titre">
-                        <input type="text" name="titreDiscussion" placeholder="Titre de la nouvelle discussion"/>
-                    </div>
-                    <div class="new-discussion-contenu">
-                        <textarea rows="10" cols="30" name="texteDiscussion" placeholder="Contenu" style="width: 100%; height: 100%"></textarea> <?php //<textarea> plusieurs lignes </textarea> ?>
-                    </div>
+                    <div class="new-discussion-titre"> <input type="text" name="titreDiscussion" placeholder="Titre de la nouvelle discussion" required/> </div>
+                    <div class="new-discussion-contenu"> <textarea rows="10" cols="30" name="texteDiscussion" placeholder="Contenu" required style="width: 100%; height: 100%"></textarea> </div>
                     <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
                     <input type="hidden" name="idCategorie" value="<?php echo $categorie->getIdCategorie(); ?>"/>
-                    <div class="new-discussion-button">
-                        <button type="submit">Créer</button>
-                    </div>
+                    <div class="new-discussion-button"> <button type="submit">Créer</button> </div>
                 </form> 
             </div>  
 <?php  
         }
     }
     
-    
-    
+      
 //AFFICHAGE CATEGORIES
     //$tabCategories = CategorieManager::findAllCategories();
 ?>
     <div class="categorie-container">
-        <div class="sujet-titre">SUJETS</div>
+        <div class="categorie-titre">Catégories</div>
 <?php
 
     foreach($tabCategories as $categorie)
     {
 ?>
-        <div class="categorie-nom">
+        <div class="categorie-link">
             <img src="images/folder.png"  alt="icone-dossier-categorie">
-            <a href='sujet.php?idCateg=<?php echo $categorie->getIdCategorie(); ?>'> <?php echo $categorie->getNomCategorie()?> </a> 
-        </div>
-        
-
+            <a class="categorie-nom" href='sujet.php?idCateg=<?php echo $categorie->getIdCategorie(); ?>'> <?php echo $categorie->getNomCategorie()?> </a> 
+        </div> 
 <?php
     }
-    ?>
+?>
     </div>
 
 <?php

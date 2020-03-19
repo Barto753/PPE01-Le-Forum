@@ -31,7 +31,6 @@
     $categorie = CategorieManager::findCategorie($idCategorie);
     $user = new Utilisateur();
     
-    
     foreach($tabDiscussions as $discussion)
     {
 ?>
@@ -73,17 +72,15 @@
                         </form>
 <?php
                     }
-
                 }
             }
         }
-?>
-            
+?>  
         <div class="discussion-titre"><?php echo $discussion->getTitreDiscussion(); ?></div>
-        <?php if($discussion->getIsClosed()==0){ echo "Statut : ouvert"; }else if($discussion->getIsClosed()==1){ echo "Statut : fermé";}?>
+        <div class="discussion-statut"><?php if($discussion->getIsClosed()==0){ echo "Statut : ouvert"; }else if($discussion->getIsClosed()==1){ echo "Statut : fermé";}?></div>
         <div class="discussion-date"><?php echo "Créé le ".$discussion->getDateDiscussion(); ?></div>
-        <div class="discussion-texte"><?php echo "Texte: ".$discussion->getTexteDiscussion(); ?></div>
-        <div class="discussion-user"><?php echo "Par ".$user->getPseudo(); ?></div>
+        <div class="discussion-texte"><?php echo $discussion->getTexteDiscussion(); ?></div>
+        <div class="discussion-pseudo"><?php echo "Par ".$user->getPseudo(); ?></div>
         <img class="discussion-avatar" src="images/<?php echo $user->getCheminAvatar();?>"/>
         <div class="message-nombre"><?php echo "Messages (".sizeof($tabMessages).")"; ?></div>
 <?php 
@@ -97,10 +94,10 @@
                 <div class="new-message-entete">Réagir à la discussion</div>
                 <form method="POST" action="insertMsg.php">
                     <div class="new-message-contenu">
-                        <input type="text" name="texteMsg" placeholder="Contenu"/> <?php //texteMsg => texteMessage ? ?>
+                        <input type="text" name="texteMsg" placeholder="Contenu" required/> <?php //texteMsg => texteMessage ? ?>
                     </div>
                         <input type="hidden" name="idUser" value="<?php echo $currentUser->getIdUser(); ?>"/>
-                        <input type="hidden" name="idCategorie" value="<?php echo $idCategorie;?>"/>
+                        <input type="hidden" name="idCategorie" value="<?php echo $idCategorie; ?>"/>
                         <input type="hidden" name="nomCategorie" value="<?php echo $categorie->getNomCategorie(); ?>"/>
                         <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
                     <div class="new-discussion-button">
@@ -129,15 +126,14 @@
                         <input type="hidden" name="idMessage" value="<?php echo $message->getIdMessage() ;?>"/>
                         <button type="submit">Supprimer</button> 
                     </form>
-        
-                    
 <?php
                 }
             }
+            
             //AFFICHAGE MESSAGES
 ?>
             <div class="message-container">
-                <div class="message-user"><?php echo "de ".$user->getPseudo(); ?></div>
+                <div class="message-user"><?php echo $user->getPseudo(); ?></div>
                 <div class="message-date"><?php echo "posté le ".$message->getDateMessage(); ?></div>
                 <div class="message-texte"><?php echo $message->getTexteMessage(); 
                     if(isset($_SESSION["login"]))
@@ -155,7 +151,7 @@
                                 <input type="hidden" name="idDiscussion" value="<?php echo $message->getIdDiscussion(); ?>"/>
                                 <input type="hidden" name="idMessage" value="<?php echo $message->getIdMessage(); ?>"/>
                                 <!-- <input type="hidden" name="dateModif" value="<?php echo time(date('Y/m/d H:i:s'));?>"/> -->
-                                <input type="text" name="texteMessage" placeholder="Contenu"/>
+                                <input type="text" name="texteMessage" placeholder="Contenu" required/>
                                 <button type="submit">Modifier</button> 
                             </form>  
 <?php   

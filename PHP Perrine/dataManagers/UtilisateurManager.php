@@ -2,10 +2,12 @@
 
     include_once("DatabaseLinker.php");
     include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Utilisateur.php");
-;
+
     
     class UtilisateurManager
     {
+        
+        
         public static function updatePassword($user)
         {
             $connex = DatabaseLinker::getConnexion();
@@ -50,19 +52,21 @@
         
         public static function verifBanIsOver($user)
         {
+            date_default_timezone_set('Europe/Paris');
             //verifier si la dateFinBan est > currentDate
             $currentDate = date("Y-m-d H:i:s");
             $dateFinBan = $user->getDateFinBan();
             
             //$currentDate = newDateTime($currentDate);
-            $currentDate = $currentDate->format('YmdHis');
+            //$currentDate = idate($currentDate);
+            //echo $currentDate;
             //$dateFinBan = newDateTime($dateFinBan);
-            $dateFinBan = $dateFinBan->format('YmdHis');
+            //$dateFinBan = $dateFinBan->format('YmdHis');
             
             //20200319 132955
             //20200319 164501
             $banIsOver = 0;
-            if($dateFinBan > $currentDate)
+            if($dateFinBan <= $currentDate)
             {
                 $banIsOver = 1;
             }

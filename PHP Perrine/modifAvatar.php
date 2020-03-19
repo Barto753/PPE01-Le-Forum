@@ -16,23 +16,26 @@
 
             if( !is_uploaded_file($tmp_file) )
             {
-                exit("Le fichier est introuvable");
+                echo "Le fichier est introuvable";
+                exit;
             }
 
             // on vérifie maintenant l'extension
             $type_file = $_FILES['newAvatar']['type'];
 
-            if( !strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'png') && !strstr($type_file, 'gif') && !strstr($type_file, 'bmp'))
+            if(!strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'png') && !strstr($type_file, 'gif') && !strstr($type_file, 'bmp'))
             {
-                exit("Le fichier n'est pas une image");
+                echo "Le fichier n'est pas une image";
+                exit;
             }
 
             // on copie le fichier dans le dossier de destination
             $name_file = $_FILES['newAvatar']['name'];
 
-            if( !move_uploaded_file($tmp_file, $content_dir . $name_file) )
+            if(!move_uploaded_file($tmp_file, $content_dir . $name_file))
             {
-                exit("Impossible de copier le fichier dans $content_dir");
+                echo "Impossible de copier le fichier dans $content_dir";
+                exit;
             }
 
             echo "Le fichier a bien été uploadé";

@@ -2,54 +2,125 @@
 {
     font-size: 14px;
     height: 100%;
-    
 }
 
 .body
 {   
     margin: 0;
     min-height: 100%;
+}
+
+img
+{
+    width: 40px;
+    height: 40px;
+}
+
+
+.page-container
+{
+    font-family: tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #C9EDD8;
+    padding-bottom: 100px;
+    height:100%;
+    width: 100%;
+}
+
+.page-content
+{
+    margin-top: 20px;
+    width: 850px;
+    background: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 10px #525252;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+        
+}
+
+.entete img
+{
+    width: 70%;
+    height: 100%;
+    margin: 200px;
+}
+
+.entete
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    background-color: white;
     
 }
 
-.accueil-link
+.entete-link
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navigation-link
 {
     display: flex;
     align-items: center;
     text-decoration: none;
+    padding: 5px;
+    color: black;
 }
 
-.bandeau-top
+.home-link
+{
+    font-weight: bold;
+}
+
+.bandeau-navigation-top
 {
     width: 100%;
-    height:50px;
-    background: #990033;
+    height: 50px;
+    background: #EDD6C9;
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: tahoma, sans-serif;
+    border: 0.5px solid black;
 }
 
-.bandeau-top img
+.bandeau-navigation-top img
 {
-    height: 40px;
-    width: 40px;
+    height: 30px;
+    width: 30px;
     margin-right: 7px;
     margin-left: 7px;
 }
 
-.bandeau-top span
+.bandeau-navigation-top span
 {
-    color:white;
-    font-weight: bold;
-    font-size: 25px;
+    color: black;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+.navigation-link
+{
+    
 }
 
 .bandeau-bottom
 {
     width: 100%;
     height:50px;
-    background: #990033;
+    background: #EDD6C9;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -58,7 +129,7 @@
 
 .bandeau-bottom span
 {
-    color:white;
+    color:black;
     font-size: 15px;
 }
 
@@ -70,25 +141,7 @@
     margin-left: 7px;
 }
 
-.page-container
-{
-    font-family: tahoma, sans-serif;
-    display: flex;
-    justify-content: center;
-    background: #cccccc;
-    padding-bottom: 500px;
-    height:100%;
-}
 
-.page-content
-{
-    margin-top: 20px;
-    width: 850px;
-    background: white;
-    padding: 10px;
-    margin-bottom: 20px;
-    box-shadow: 3px 3px 10px #525252
-}
 
 .connexion-box
 {
@@ -96,7 +149,7 @@
     justify-content: flex-end;
     padding: 10px;
     margin-bottom: 20px;
-    background: black;
+    background: #dfdfff;
     color: white;
 }
 
@@ -109,6 +162,11 @@
     color: black;
     margin-bottom: 5px;
 }*/
+
+.inscription-button
+{
+    
+}
 
 .inscription-box
 {
@@ -136,26 +194,37 @@
     border-bottom: 1px solid black;
 }
 
-.sujet-titre
+.categorie-titre
 {
     margin-bottom: 15px;
     padding: 10px;
     border-top: 1px solid black;
-    color: #990033;
+    color: black;
     font-size: 30px;
+}
+
+.categorie-link
+{
+    margin-bottom: 15px;
+    padding: 15px;
+    background-color: #cccccc;
+    border: 1px solid black;
+    font-size: 25px;
+    text-decoration: none;
 }
 
 .categorie-nom
 {
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #cccccc;
-    border: 1px solid black;
-    color: white;
-    font-size: 30px;
+    text-decoration: none;
+    color: black;
 }
 
-img
+.categorie-container
+{
+    justify-content: flex-start;
+}
+
+.categorie-container img
 {
     height: 30px;
     width: 30px;
@@ -163,16 +232,19 @@ img
 
 .discussion-container
 {
+    margin-top: 10px;
     margin-bottom: 40px;
     padding-bottom : 40px;
-    /*border-bottom: 1px solid black;*/
+    border: 0.5px solid black;
+    background-color: #f2f2f2;
+    padding: 20px;
 }
 
 .discussion-titre
 {
     font-weight: bold;
     font-size: 18px;
-    color: #990033;
+    color: black;
     margin-bottom: 5px;
 }
 
@@ -184,7 +256,7 @@ img
 .discussion-texte
 {
     margin-bottom: 3px;
-    background-color: #cccccc;
+    background-color: white;
     padding: 10px;
 }
 
@@ -198,6 +270,7 @@ img
 {
     /*font-weight: normal;*/
     color: blue;
+    background-color: white;
     font-size: 15px;
     border: 0.5px solid black;
     margin-bottom: 5px;
