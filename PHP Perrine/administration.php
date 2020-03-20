@@ -1,5 +1,4 @@
 <?php
-    session_start();
     include_once("include/header.php");
     
     include_once("data/Utilisateur.php");
@@ -16,21 +15,26 @@
     
     if(isset($_SESSION["login"]))
     {
-        echo "Vous êtes connecté en tant que ".$_SESSION["login"];
-        $currentUser = UtilisateurManager::findUser($_SESSION["login"]); //user connecté
 ?>
-        <a href="index.php?deco=true">Déconnexion</a>
+        <div class="session-container">
+<?php
+            echo "Vous êtes connecté en tant que ".$_SESSION["login"];
+            $currentUser = UtilisateurManager::findUser($_SESSION["login"]); //user connecté
+?>
+            <div class="deco-bouton"> <a href="index.php?deco=true">Déconnexion</a> </div> 
+        </div>
 <?php
         if($currentUser->getIsAdmin()==1)
         {
             $tabUsers = UtilisateurManager::findAllUsers();
 ?>
-            <table>
+        <div class="tab-users">
+            <table border="1" cellpadding="10" width="100%">
                 <tr>
-                    <td>IdUser</td>
-                    <td>Pseudo</td>
-                    <td>Admin</td>
-                    <td>Ban</td>
+                    <th>IdUser</th>
+                    <th>Pseudo</th>
+                    <th>Admin</th>
+                    <th>Ban</th>
                 </tr>
 <?php
             foreach ($tabUsers as $user)
@@ -69,6 +73,7 @@
             }
 ?>
             </table>
+        </div>
 <?php
         }
     }

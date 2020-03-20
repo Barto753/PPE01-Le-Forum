@@ -1,5 +1,4 @@
 <?php 
-    session_start();
     include_once("include/header.php");
     
     include_once("data/Utilisateur.php");
@@ -9,19 +8,50 @@
     include_once("dataManagers/DiscussionManager.php");
     include_once("dataManagers/MessageManager.php");
     include_once("dataManagers/CategorieManager.php");
+
+       //si la session n'est pas définie 
+    //NON CONNECTE
+    if(!isset($_SESSION["login"]))
+    {
+        //echo "bonjour session login n'est pas defini";
 ?>
-    
+        <div class="inscription-connexion-box">
             
- <?php
+            <div class="button">
+                <!--<form action="inscription.php">
+                    <button type="submit">Inscription</button>
+                </form>-->
+                <a href="inscription.php">Inscription</a>
+            </div>
+
+            <div class="connexion-box">
+                <form method="POST" action="index.php">
+                    <label> Pseudo </label>
+                    <input type="text" name="pseudo"/>
+                    <label> Mot de passe </label>
+                    <input type="password" name="password"/>
+                    <input type="submit" value="Connexion"/>
+                </form>
+            </div>
+            
+        </div> 
+<?php
+    }
+            
+
     date_default_timezone_set('Europe/Paris');
     $currentUser = new Utilisateur();
     
     if(isset($_SESSION["login"]))
     {
-        echo "Vous êtes connecté en tant que ".$_SESSION["login"];
-        $currentUser = UtilisateurManager::findUser($_SESSION["login"]); //user connecté
 ?>
-        <a href="index.php?deco=true">Déconnexion</a>
+        <div class="session-container">
+<?php
+            echo "Vous êtes connecté en tant que ".$_SESSION["login"];
+            $currentUser = UtilisateurManager::findUser($_SESSION["login"]); //user connecté
+?>
+            <div class="deco-bouton"> <a href="index.php?deco=true">Déconnexion</a> </div> 
+        </div>
 <?php
     }
     

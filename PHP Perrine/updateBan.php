@@ -1,5 +1,4 @@
 <?php
-    session_start();
     include_once("include/header.php");
     
     include_once("dataManagers/UtilisateurManager.php");
@@ -16,17 +15,25 @@
         if(empty($_POST["motifBan"]) && empty($_POST["duree-bannissement"]) && empty($_POST["isBanned"]))
         {       
 ?>
-            <form method="POST" action="updateBan.php">
-                <SELECT name="duree-ban" size="1">
-                    <option>1h
-                    <option>24h
-                    <option>48h
-                    <option>Indeterminee
-                </SELECT>
-                <input type="text" name="motifBan" placeholder="motif du bannissement"/> 
-                <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
-                <input type="submit" value="Bannir"/>
-            </form>
+            <div class="bannissement-container">
+                <form method="POST" action="updateBan.php">
+                    <div class="bannissement-liste">
+                        <SELECT name="duree-ban" size="1">
+                            <option>1h
+                            <option>24h
+                            <option>48h
+                            <option>Indeterminee
+                        </SELECT>
+                    </div>
+                    <div class="bannissement-motif">
+                        <input type="text" name="motifBan" placeholder="motif du bannissement"/> 
+                    </div>
+                    <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
+                    <div class="bannissement-bouton">
+                        <input type="submit" value="Bannir"/>
+                    </div>
+                </form>
+            </div>
 <?php
         }
         

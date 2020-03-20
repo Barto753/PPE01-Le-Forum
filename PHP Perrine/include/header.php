@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -8,11 +12,15 @@
     </head>
 
     <body>
-
+        
         
         <div class="page-container">
             
+            
             <div class="entete"> 
+<?php 
+                
+?>
                 <a class="entete-link" href="index.php"> 
                     <img src="images-general/forum-logo.png" alt="logo"/> 
                 </a> 
@@ -69,5 +77,7 @@
                     </a>
 
                 </div>
+    
+
                 
             
