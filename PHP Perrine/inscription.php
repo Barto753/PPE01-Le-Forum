@@ -1,8 +1,7 @@
 <?php
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/include/header.php");
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Utilisateur.php");
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/dataManagers/DatabaseLinker.php");
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/dataManagers/UtilisateurManager.php");
+    include_once("include/header.php");
+    include_once("data/Utilisateur.php");
+    include_once("dataManagers/UtilisateurManager.php");
 ?>
 
 <div class="inscription-box">
@@ -10,9 +9,9 @@
     <div class="inscription-box-titre"> Inscription </div>
 
     <form method="POST" action="inscription.php">
-        <input type="text" name="pseudo" placeholder="Pseudo"/>
-        <input type="text" name="email" placeholder="Email"/>
-        <input type="password" name="password" placeholder="Mot de passe"/>
+        <input type="text" name="pseudo" placeholder="Pseudo" required/>
+        <input type="text" name="email" placeholder="Email" required/>
+        <input type="password" name="password" placeholder="Mot de passe" required/>
         <input type="radio" name="genre" value="femme"> Femme
         <input type="radio" name="genre" value="homme"> Homme
         <input type="submit" value="Valider"/>
@@ -55,33 +54,58 @@
         //si tous les champs sont remplis, on insert les donnees dans la bdd
         if(empty($tabErreurs))
         {
-            $user = new Utilisateur();
+            $tabUsers = UtilisateurManager::findAllUsers();
+            
+            $newUser = new Utilisateur();
 
-            $user->setPseudo($_POST["pseudo"]);
-            $user->setEmail($_POST["email"]);
-            $user->setPassword($_POST["password"]);
-            if($_POST["genre"]=="homme")
-            {
-                $user->setCheminAvatar("single-man-circle.png");
-            }
-            else if($_POST["genre"]=="femme")
-            {
-                $user->setCheminAvatar("single-woman-circle.png");
-            }
-            $user->setIsAdmin(0);
-            $user->setIsConnected(0);
-            $user->setIsBanned(0);
-            $user->setMotifBan("null");
-            $user->setDateFinBan("2000-01-01");
+            $newUser->setPseudo($_POST["pseudo"]);
+            $newUser->setEmail($_POST["email"]);
+            $newUser->setPassword($_POST["password"]);
             
-            UtilisateurManager::insertUser($user);
+            $inscriptionOk = 1;
             
-            if(UtilisateurManager::findUser($_POST["pseudo"])!=null)
+            foreach($tabUsers as $user)
             {
-                //echo "Inscription réussie";
-                header('Location: index.php');
-                exit;
+                if($user->getPseudo()==$newUser->getPseudo())
+                {
+                    $inscriptionOk = 0;
+                    echo "Pseudo déjà utilisé";
+                }
+                
+                if($user->getEmail()==$newUser->getEmail())
+                {
+                    $inscriptionOk = 0;
+                    echo "Email déjà utilisé";
+                }
             }
+            
+            if($inscriptionOk == 1)
+            {
+                if($_POST["genre"]=="homme")
+                {
+                    $newUser->setCheminAvatar("single-man-circle.png");
+                }
+                else if($_POST["genre"]=="femme")
+                {
+                    $newUser->setCheminAvatar("single-woman-circle.png");
+                }
+                
+                $newUser->setIsAdmin(0);
+                $newUser->setIsConnected(0);
+                $newUser->setIsBanned(0);
+                $newUser->setMotifBan("null");
+                $newUser->setDateFinBan("2000-01-01");
+
+                UtilisateurManager::insertUser($newUser);
+
+                if(UtilisateurManager::findUser($_POST["pseudo"])!=null)
+                {
+                    //echo "Inscription réussie";
+                    header('Location: index.php');
+                    exit;
+                }
+            }
+            
         }
     }
     

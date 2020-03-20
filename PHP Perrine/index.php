@@ -1,6 +1,6 @@
 <?php
     include_once("include/header.php");
-    session_start();
+    
     
     include_once("data/Utilisateur.php");
     include_once("dataManagers/DatabaseLinker.php");
@@ -11,8 +11,7 @@
     include_once("dataManagers/CategorieManager.php");
 
     /*session_unset();
-    session_destroy();
-    unset($_SESSION["login"]);*/
+    session_destroy();*/
     
     
     //si le bouton de deconnexion a renvoyé true
@@ -49,28 +48,29 @@
     $user = null;
     //si qqch est rentré dans le form mais qu'il manque un champ 
     //NON CONNECTE + FORM MAL REMPLI + AFFICHE ERREURS
-    $tabErreurs=array();
+    $tabErreursConnexion=array();
+    
     if(!empty($_POST))
     {
         if(empty($_POST["pseudo"]))
         {
-            $tabErreurs["pseudo"]= "Veuillez saisir un pseudo.";
+            $tabErreursConnexion["pseudo"]= "Veuillez saisir un pseudo.";
         }
 
         if(empty($_POST["password"]))
         {
-            $tabErreurs["password"]= "Veuillez saisir un mot de passe.";
+            $tabErreursConnexion["password"]= "Veuillez saisir un mot de passe.";
         }
 
-        foreach($tabErreurs as $error)
+        foreach($tabErreursConnexion as $errorCo)
         {
-            echo $error;
+            echo $errorCo;
         }
     }
     
     
     //s'il n'y a pas eu d'erreurs dans le form
-    if(empty($tabErreurs))
+    if(empty($tabErreursConnexion))
     {
         //si pseudo et password du form ne sont pas vides
         //DOUBLE VERIF
@@ -82,16 +82,30 @@
             {
                 //echo "bonjour le post pseudo a été trouvé dans la bdd + mdp";
                 $user = UtilisateurManager::findUser($_POST["pseudo"]);
-                if($user->getIsBanned()==0)
+                
+                if($user->getIsBanned()==0 || UtilisateurManager::verifBanIsOver($user)==1)
                 {
                     $user->setIsConnected(1);
                     UtilisateurManager::updateConnexion($user);
+                    
+                    $user->setIsBanned(0);
+                    $user->setDateFinBan("2000-01-01");
+                    $user->setMotifBan("null"); 
+                    UtilisateurManager::updateBannissement($user);
+                    
                     //on set le parametre login de la session avec le pseudo du user connecté
                     $_SESSION["login"]=$_POST["pseudo"];
                 }
                 else 
                 {
-                    echo "VOUS AVEZ ETE BANNI JUSQU'AU".$user->getDateFinBan();
+?>
+                        <div class="bannissement-msg">
+<?php
+                    echo "Vous avez été banni jusqu'au ".$user->getDateFinBan();
+                    echo " à cause de ".$user->getMotifBan();
+?>
+                    </div>
+<?php
                 }
             }
             else
@@ -104,48 +118,59 @@
     
     //si la session n'est pas définie 
     //NON CONNECTE
-    if(!isset($_SESSION["login"]))//&& !empty($_POST)
+    if(!isset($_SESSION["login"]))
     {
         //echo "bonjour session login n'est pas defini";
 ?>
-        <div class="inscription-button">
-            <form action="inscription.php">
-                <button type="submit">Inscription</button>
-            </form>
-        </div>
+        <div class="inscription-connexion-box">
+            
+            <div class="button">
+                <!--<form action="inscription.php">
+                    <button type="submit">Inscription</button>
+                </form>-->
+                <a href="inscription.php">Inscription</a>
+            </div>
 
-        <div class="connexion-box">
-            <form method="POST" action="index.php">
-                <label> Pseudo </label>
-                <input type="text" name="pseudo"/>
-                <label> Mot de passe </label>
-                <input type="password" name="password"/>
-                <input type="submit" value="Connexion"/>
-            </form>
-        </div>
+            <div class="connexion-box">
+                <form method="POST" action="index.php">
+                    <label> Pseudo </label>
+                    <input type="text" name="pseudo"/>
+                    <label> Mot de passe </label>
+                    <input type="password" name="password"/>
+                    <input type="submit" value="Connexion"/>
+                </form>
+            </div>
+            
+        </div> 
 <?php
     }
-    
+    $tabCategories = CategorieManager::findAllCategories();
     //si le login de la session existe bien 
     if(isset($_SESSION["login"]))
     {
         //echo "bonjour session login est defini";
-?>
-        
-        <a href="index.php?deco=true">Déconnexion</a>
-<?php
-        echo "Vous êtes connecté en tant que ".$_SESSION["login"];
         $user = UtilisateurManager::findUser($_SESSION["login"]);
-        //echo $user->getPseudo();
-
+?>
+        <div class="session-container">
+<?php
+            echo "Vous êtes connecté en tant que ".$_SESSION["login"];
+?>
+            <div class="deco-bouton"> <a href="index.php?deco=true">Déconnexion</a> </div> 
+        
+<?php
+        
+        
         if($user->getIsConnected()==1)
         {
 ?>
-            <div class="account-icone">
-                <a href="account.php">
-                <img src="images/style-one-pin-user.png" alt="logo-avatar">
-                <input type="hidden" name="idUser" value="<?php $user->getIdUser();?>">
-                </a>
+                <div class="account-icone">
+                    <a href="account.php">
+                        <img class="session-settings-img" src="images-general/navigation-menu-horizontal-1.png"/>
+                        
+                        <input type="hidden" name="idUser" value="<?php $user->getIdUser();?>">
+                    </a>
+                    <div class="session-settings-text"> Compte </div>
+                </div>
             </div>
 <?php
             //echo "bonjour isconnected du user = 1";
@@ -157,7 +182,8 @@
                 <div class="new-discussion-entete">Créer un nouveau fil de discussion</div>
                 <form method="POST" action="insertDiscu.php">
                     <div class="new-discussion-liste">
-                        <SELECT name="categorie-discussion" size="1">
+                        <?php echo "A propos de :"; ?>
+                        <SELECT name="categorie-discussion" size="1" style="width: 30%; height: 30px; font-size: 20px;">
                             <?php
                             foreach ($tabCategories as $categorie)
                             {
@@ -166,44 +192,35 @@
                             ?>
                         </SELECT>
                     </div>
-                    <div class="new-discussion-titre">
-                        <input type="text" name="titreDiscussion" placeholder="Titre de la nouvelle discussion"/>
-                    </div>
-                    <div class="new-discussion-contenu">
-                        <textarea rows="10" cols="30" name="texteDiscussion" placeholder="Contenu" style="width: 100%; height: 100%"></textarea> <?php //<textarea> plusieurs lignes </textarea> ?>
-                    </div>
+                    <div class="new-discussion-titre"> <input type="text" name="titreDiscussion" placeholder="Titre de la nouvelle discussion" required style="width: 100%; height: 30px; font-size: 20px;"/> </div>
+                    <div class="new-discussion-contenu"> <textarea rows="6" cols="20" name="texteDiscussion" placeholder="Contenu" required style="width: 100%; height: 100%; font-size: 20px; resize:none;"></textarea> </div>
                     <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
                     <input type="hidden" name="idCategorie" value="<?php echo $categorie->getIdCategorie(); ?>"/>
-                    <div class="new-discussion-button">
-                        <button type="submit">Créer</button>
-                    </div>
+                    <div class="new-discussion-button"> <button type="submit">Créer</button> </div>
                 </form> 
             </div>  
 <?php  
         }
     }
     
-    
-    
+      
 //AFFICHAGE CATEGORIES
     //$tabCategories = CategorieManager::findAllCategories();
 ?>
+<div class="categorie-titre">Catégories</div>
     <div class="categorie-container">
-        <div class="sujet-titre">SUJETS</div>
+        
 <?php
 
     foreach($tabCategories as $categorie)
     {
 ?>
-        <div class="categorie-nom">
-            <img src="images/folder.png"  alt="icone-dossier-categorie">
-            <a href='sujet.php?idCateg=<?php echo $categorie->getIdCategorie(); ?>'> <?php echo $categorie->getNomCategorie()?> </a> 
-        </div>
-        
-
+        <div class="categorie-link">
+            <a class="categorie-nom" href='sujet.php?idCateg=<?php echo $categorie->getIdCategorie(); ?>'> <?php echo $categorie->getNomCategorie()?> </a> 
+        </div> 
 <?php
     }
-    ?>
+?>
     </div>
 
 <?php

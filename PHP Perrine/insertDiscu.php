@@ -15,7 +15,7 @@
         $discussion = new Discussion();
         $discussion->setTitreDiscussion($_POST["titreDiscussion"]);
         $discussion->setTexteDiscussion($_POST["texteDiscussion"]);
-        $discussion->setDateDiscussion(date("Y-m-d"));
+        $discussion->setDateDiscussion(date("Y-m-d H:i:s"));
         $discussion->setIsClosed(0);
         $discussion->setIdCategorie($idCategorie);
         $discussion->setIdUser($_POST["idUser"]);

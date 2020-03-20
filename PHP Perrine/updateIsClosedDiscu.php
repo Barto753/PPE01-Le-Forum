@@ -20,7 +20,7 @@
             $discussion = DiscussionManager::updateIsClosedDiscussion($discussion);
         }
      
-        header('Location: sujet'.$idCategorie.'.php');
+        header('Location: sujet.php?idCateg='.$idCategorie);
         exit;
     }
     
