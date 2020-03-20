@@ -16,7 +16,15 @@
         {       
 ?>
             <div class="bannissement-container">
+                
+                <div class="bannissement-titre">
+                    Bannir un utilisateur
+                </div>
+                <div class="bannissement-texte">
+                    Durée :
+                    </div>
                 <form method="POST" action="updateBan.php">
+                    
                     <div class="bannissement-liste">
                         <SELECT name="duree-ban" size="1">
                             <option>1h
@@ -25,14 +33,21 @@
                             <option>Indeterminee
                         </SELECT>
                     </div>
+                
+                <div class="bannissement-texte">
+                    Motif :
+                </div>
                     <div class="bannissement-motif">
                         <input type="text" name="motifBan" placeholder="motif du bannissement"/> 
                     </div>
+                    
                     <input type="hidden" name="idUser" value="<?php echo $user->getIdUser(); ?>"/>
+                    
                     <div class="bannissement-bouton">
                         <input type="submit" value="Bannir"/>
                     </div>
                 </form>
+                
             </div>
 <?php
         }

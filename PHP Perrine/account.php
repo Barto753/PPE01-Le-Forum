@@ -22,13 +22,21 @@
         </div>
 
         <div class="account-container">
-            
+            <?php
+            //BOUTON ADMINISTRATION
+            if($currentUser->getIsAdmin()==1)
+            {
+?>
+            <div class="account-bloc"> <div class="deco-bouton"> <a href="administration.php">Administration</a> </div></div>
+<?php
+            }
+            ?>
             <div class="account-bloc"><?php echo "Pseudo : ".$currentUser->getPseudo(); ?></div>
             <div class="account-bloc"><?php echo "Email : ".$currentUser->getEmail(); ?></div>
             <div class="account-bloc">
                 <?php echo "Avatar : "?>
                 <img class="account-avatar-img" src="images/<?php echo $currentUser->getCheminAvatar(); ?>">
-            </div>           
+                      </div>
 
 <?php
             //BOX MODIFIER PASSWORD
@@ -44,13 +52,7 @@
                 </form>
             </div>
 <?php
-            //BOUTON ADMINISTRATION
-            if($currentUser->getIsAdmin()==1)
-            {
-?>
-                <div class="account-bloc"> <a href="administration.php">Administration</a> </div>
-<?php
-            }
+            
             //BOX MODIFIER AVATAR
 ?>
             <div class="account-avatar-modif-container">
@@ -62,7 +64,8 @@
                 </form>
             </div>
                 
-        </div>
+        
+            </div> 
 <?php
               
     }

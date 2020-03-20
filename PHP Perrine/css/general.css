@@ -16,6 +16,12 @@ img
     height: 40px;
 }
 
+.account-icone
+{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
 
 .page-container
 {
@@ -202,6 +208,11 @@ img
     box-shadow:1px 1px 3px #999;
 }
 
+.deco-bouton
+{
+    text-decoration: none;
+}
+
 .inscription-connexion-box
 {
     display: flex;
@@ -238,9 +249,13 @@ img
 
 .button a
 {
-    text-decoration: none;
+    border-radius:12px 0 12px 0;
+    background: #f5f5f5;
+    border:none;
     color:#555;
-    padding: 10px;
+    font: bold 12px Verdana;
+    padding:10px;
+    box-shadow:1px 1px 3px #999;
 }
 
 .button a:hover
@@ -402,36 +417,113 @@ img
     margin-bottom: 5px;
 }
 
+.bouton-discussion
+{
+    margin-bottom: 20px;
+}
+
 .message-nombre
 {
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    text-align: right;
 }
+
+/* NEW MESSAGE CONTAINER*/
+
+.new-message-container
+{
+    color: black;
+    font-size: 15px;
+    margin-bottom: 25px;
+    padding: 10px;
+    margin-top:10px;
+    border: 0.5px solid black;
+    width: 50%;
+    background-color: #DDEDF8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 200px;
+}
+
+.new-message-entete
+{
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.new-message-contenu
+{
+    margin-bottom: 20px;
+}
+
+.new-message-button
+{
+    margin-bottom: 20px;
+}
+
+/* MESSAGE */
 
 .message-container
 {
     /*font-weight: normal;*/
-    color: blue;
+    color: black;
     background-color: white;
     font-size: 15px;
     border: 0.5px solid black;
     margin-bottom: 5px;
     padding: 10px;
+    margin-top:10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
+.message-block-droite
+{
+    margin: 10px;
+    background-color: white;
+    padding: 10px;
+    width: 100%;
+    text-align: justify;
+    height: 100%;
+}
+
+.message-block-gauche
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    flex-direction: column;
+}
 .message-texte
 {
-    background-color: #cccccc;
-    padding: 10px;
+    background-color: #DDEDF8;
+    padding: 20px;
+    margin-bottom: 10px;
 }
 
 .message-date
 {
     padding: 5px;
+    text-align: center;
 }
 
 .message-user
 {
     padding: 5px;
+}
+
+.message-bouton-delete
+{
+    margin-bottom: 15px;
+}
+.message-bouton-modif
+{
+    
 }
 
 /* NEW DISCUSSION */
@@ -495,16 +587,43 @@ img
 
 .account-container
 {
-    border:0.5px solid black;
+    /*border:0.5px solid black;
     display: flex;
     margin: 10px;
     flex-wrap: wrap;
+    flex-direction: column;*/
+    
+    margin-top: 15px;
+    margin-bottom: 15px;
+    /*padding: 10px;*/
+    background-color: #DDEDF8;
+    border: 0.5px solid black;
+    color: black;
+    display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 30px;
+    padding: 30px;
 }
 
 .account-bloc
 {
     margin: 10px;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.account-avatar-modif-container
+{
+    margin: 10px;
+    font-size: 15px;
+    padding: 10px;
+}
+
+.account-avatar-img
+{
+    width: 30px;
+    height: 30px;
 }
 
 /* ADMINISTRATION */
@@ -512,4 +631,56 @@ img
 .tab-users
 {
     border: 0.5px;
+}
+
+.bannissement-msg
+{
+    margin: 20px;
+    color: red;
+    font-weight: bold;
+}
+
+/* PAGE UPDATE BAN*/
+
+.bannissement-container
+{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    /*padding: 10px;*/
+    background-color: #DDEDF8;
+    border: 0.5px solid black;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size: 30px;
+    padding: 30px;
+}
+
+.bannissement-titre
+{
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+.bannissement-liste
+{
+    font-size: 20px;
+    margin: 10px;
+}
+
+.bannissement-motif
+{
+    font-size: 20px;
+    margin: 10px;
+}
+
+.bannissement-bouton
+{
+    margin: 10px;
+}
+
+.bannissement-texte
+{
+    font-size: 20px;
 }

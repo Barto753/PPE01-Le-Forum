@@ -98,7 +98,14 @@
                 }
                 else 
                 {
-                    echo "VOUS AVEZ ETE BANNI JUSQU'AU ".$user->getDateFinBan();
+?>
+                        <div class="bannissement-msg">
+<?php
+                    echo "Vous avez été banni jusqu'au ".$user->getDateFinBan();
+                    echo " à cause de ".$user->getMotifBan();
+?>
+                    </div>
+<?php
                 }
             }
             else
