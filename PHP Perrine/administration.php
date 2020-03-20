@@ -1,7 +1,7 @@
 <?php
     include_once("include/header.php");
     
-    include_once("data/Utilisateur.php");
+    include_once("dataManagers/data/Utilisateur.php");
     include_once("dataManagers/DatabaseLinker.php");
     include_once("dataManagers/UtilisateurManager.php");
     include_once("dataManagers/ConnexionManager.php");

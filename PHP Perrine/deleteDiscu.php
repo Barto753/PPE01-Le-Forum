@@ -2,8 +2,8 @@
     include_once("include/header.php");
     
     include_once("dataManagers/DiscussionManager.php");
-    include_once("data/Message.php");
-    include_once("data/Discussion.php");
+    include_once("dataManagers/data/Message.php");
+    include_once("dataManagers/data/Discussion.php");
     
     if(!empty($_POST["idDiscussion"]))
     {

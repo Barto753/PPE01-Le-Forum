@@ -1,7 +1,7 @@
 <?php 
     include_once("include/header.php");
     
-    include_once("data/Utilisateur.php");
+    include_once("dataManagers/data/Utilisateur.php");
     include_once("dataManagers/DatabaseLinker.php");
     include_once("dataManagers/UtilisateurManager.php");
     include_once("dataManagers/ConnexionManager.php");
@@ -13,14 +13,10 @@
     //NON CONNECTE
     if(!isset($_SESSION["login"]))
     {
-        //echo "bonjour session login n'est pas defini";
 ?>
         <div class="inscription-connexion-box">
             
             <div class="button">
-                <!--<form action="inscription.php">
-                    <button type="submit">Inscription</button>
-                </form>-->
                 <a href="inscription.php">Inscription</a>
             </div>
 
@@ -158,10 +154,10 @@
 
                             <input type="text" name="texteMsg" placeholder="Contenu" required/>
                         </div>
-                            <input type="hidden" name="idUser" value="<?php echo $currentUser->getIdUser(); ?>"/>
-                            <input type="hidden" name="idCategorie" value="<?php echo $idCategorie; ?>"/>
-                            <input type="hidden" name="nomCategorie" value="<?php echo $categorie->getNomCategorie(); ?>"/>
-                            <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
+                        <input type="hidden" name="idUser" value="<?php echo $currentUser->getIdUser(); ?>"/>
+                        <input type="hidden" name="idCategorie" value="<?php echo $idCategorie; ?>"/>
+                        <input type="hidden" name="nomCategorie" value="<?php echo $categorie->getNomCategorie(); ?>"/>
+                        <input type="hidden" name="idDiscussion" value="<?php echo $discussion->getIdDiscussion(); ?>"/>
                         <div class="new-message-button">
                             <button type="submit">Poster</button>
                         </div>

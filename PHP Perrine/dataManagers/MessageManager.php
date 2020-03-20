@@ -1,6 +1,6 @@
 <?php
     include_once("DatabaseLinker.php");
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Message.php");
+    include_once("dataManagers/data/Message.php");
 
 
     class MessageManager

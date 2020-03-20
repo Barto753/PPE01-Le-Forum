@@ -2,7 +2,7 @@
     include_once("include/header.php");
     
     include_once("dataManagers/UtilisateurManager.php");
-    include_once("data/Utilisateur.php");
+    include_once("dataManagers/data/Utilisateur.php");
     
     if(!empty($_POST["idUser"]) && isset($_POST["currentPassword"]) && !empty($_POST["newPassword"]) && !empty($_POST["verifCurrentPassword"]))
     {

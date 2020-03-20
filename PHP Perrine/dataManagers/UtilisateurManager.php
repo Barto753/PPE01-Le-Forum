@@ -1,13 +1,13 @@
 <?php
 
     include_once("DatabaseLinker.php");
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Utilisateur.php");
+    include_once("dataManagers/data/Utilisateur.php");
 
     
     class UtilisateurManager
     {
         
-        
+  
         public static function updatePassword($user)
         {
             $connex = DatabaseLinker::getConnexion();

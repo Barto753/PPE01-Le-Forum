@@ -2,7 +2,7 @@
     include_once("include/header.php");
     
     include_once("dataManagers/MessageManager.php");
-    include_once("data/Message.php");
+    include_once("dataManagers/data/Message.php");
     include_once("dataManagers/CategorieManager.php");
     
     date_default_timezone_set('Europe/Paris');

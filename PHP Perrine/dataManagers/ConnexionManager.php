@@ -1,7 +1,7 @@
 <?php
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/dataManagers/UtilisateurManager.php");
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/dataManagers/DatabaseLinker.php");
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/Utilisateur.php");
+    include_once("UtilisateurManager.php");
+    include_once("DatabaseLinker.php");
+    include_once("data/Utilisateur.php");
 
     class ConnexionManager
     {

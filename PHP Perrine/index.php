@@ -2,8 +2,7 @@
     include_once("include/header.php");
     
     
-    include_once("data/Utilisateur.php");
-    include_once("dataManagers/DatabaseLinker.php");
+    include_once("dataManagers/data/Utilisateur.php");
     include_once("dataManagers/UtilisateurManager.php");
     include_once("dataManagers/ConnexionManager.php");
     include_once("dataManagers/DiscussionManager.php");
@@ -18,24 +17,21 @@
     if(!empty($_GET["deco"]) && $_GET["deco"]==true)
     {
         $updateUser = false;
-        //echo "bonjour deco=true";
-        
+
         if(isset($_SESSION["login"]))
         {
             $user = UtilisateurManager::findUser($_SESSION["login"]);
             $user->setIsConnected(0);
             UtilisateurManager::updateConnexion($user);
-            //echo "bonjour session login est defini";
+
             if($user->getIsConnected()==0)
             {
-                //echo "bonjour isconnected=0";
                 $updateUser = true;
             }
         }  
         
         if($updateUser==true)
         {
-            //echo "bonjour updateuser=true";
             session_unset();
             session_destroy();
             unset($_SESSION["login"]); 
@@ -76,11 +72,9 @@
         //DOUBLE VERIF
         if(!empty($_POST["pseudo"]) && !empty($_POST["password"]))
         {
-            //echo "bonjour post de pseudo et password sont remplis";
             //si le user est dans la bdd avec un pseudo qui correspond au password
             if(ConnexionManager::testConnexionUser($_POST["pseudo"])==true)
             {
-                //echo "bonjour le post pseudo a été trouvé dans la bdd + mdp";
                 $user = UtilisateurManager::findUser($_POST["pseudo"]);
                 
                 if($user->getIsBanned()==0 || UtilisateurManager::verifBanIsOver($user)==1)
@@ -110,7 +104,6 @@
             }
             else
             {
-                //echo "bonjour le post pseudo ou mdp n'a pas été trouvé dans bdd";
                 echo "Pseudo ou mot de passe erroné, veuillez vous inscrire.";
             }
         }
@@ -120,14 +113,10 @@
     //NON CONNECTE
     if(!isset($_SESSION["login"]))
     {
-        //echo "bonjour session login n'est pas defini";
 ?>
         <div class="inscription-connexion-box">
             
             <div class="button">
-                <!--<form action="inscription.php">
-                    <button type="submit">Inscription</button>
-                </form>-->
                 <a href="inscription.php">Inscription</a>
             </div>
 
@@ -144,11 +133,11 @@
         </div> 
 <?php
     }
+    
     $tabCategories = CategorieManager::findAllCategories();
     //si le login de la session existe bien 
     if(isset($_SESSION["login"]))
     {
-        //echo "bonjour session login est defini";
         $user = UtilisateurManager::findUser($_SESSION["login"]);
 ?>
         <div class="session-container">
@@ -166,14 +155,12 @@
                 <div class="account-icone">
                     <a href="account.php">
                         <img class="session-settings-img" src="images-general/navigation-menu-horizontal-1.png"/>
-                        
                         <input type="hidden" name="idUser" value="<?php $user->getIdUser();?>">
                     </a>
                     <div class="session-settings-text"> Compte </div>
                 </div>
             </div>
 <?php
-            //echo "bonjour isconnected du user = 1";
             //AFICHAGE BOX NOUVELLE DISCUSSION
             $tabCategories = CategorieManager::findAllCategories();
 ?>
@@ -205,24 +192,21 @@
     
       
 //AFFICHAGE CATEGORIES
-    //$tabCategories = CategorieManager::findAllCategories();
 ?>
-<div class="categorie-titre">Catégories</div>
+    <div class="categorie-titre">Catégories</div>
     <div class="categorie-container">
-        
+      
 <?php
-
-    foreach($tabCategories as $categorie)
-    {
+        foreach($tabCategories as $categorie)
+        {
 ?>
-        <div class="categorie-link">
-            <a class="categorie-nom" href='sujet.php?idCateg=<?php echo $categorie->getIdCategorie(); ?>'> <?php echo $categorie->getNomCategorie()?> </a> 
-        </div> 
+            <div class="categorie-link">
+                <a class="categorie-nom" href='sujet.php?idCateg=<?php echo $categorie->getIdCategorie(); ?>'> <?php echo $categorie->getNomCategorie()?> </a> 
+            </div> 
 <?php
-    }
+        }
 ?>
     </div>
-
 <?php
     include("include/footer.php");
 ?>   

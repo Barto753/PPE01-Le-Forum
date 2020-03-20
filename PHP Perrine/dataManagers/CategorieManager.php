@@ -1,8 +1,8 @@
 <?php
 
     include_once("DatabaseLinker.php");
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/data/CategorieDiscussion.php");
-    include_once("C:/UwAmp/www/PPE01-Le-Forum/PHP Perrine/dataManagers/DiscussionManager.php");
+    include_once("dataManagers/data/CategorieDiscussion.php");
+    include_once("dataManagers/DiscussionManager.php");
     
     class CategorieManager
     {

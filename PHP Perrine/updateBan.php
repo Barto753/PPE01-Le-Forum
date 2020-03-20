@@ -2,7 +2,7 @@
     include_once("include/header.php");
     
     include_once("dataManagers/UtilisateurManager.php");
-    include_once("data/Utilisateur.php");
+    include_once("dataManagers/data/Utilisateur.php");
     
 
     if(isset($_SESSION["login"]))
@@ -22,7 +22,8 @@
                 </div>
                 <div class="bannissement-texte">
                     Durée :
-                    </div>
+                </div>
+                
                 <form method="POST" action="updateBan.php">
                     
                     <div class="bannissement-liste">
@@ -58,7 +59,6 @@
             $user->setMotifBan($_POST["motifBan"]);
             $user->setIsBanned(1);
             $timestamp=time(date('Y/m/d H:i:s'));
-            //$tomorrow  = mktime(0, 0, 0, date("m")  , date("d")+1, date("Y"));
             
             if($_POST["duree-ban"]==("1h"))
             {
@@ -75,7 +75,6 @@
             else if($_POST["duree-ban"]==("Indeterminee"))
             {
                 $user->setDateFinBan("2220-01-01");
-                //mktime(0, 0, 0, date("m"), date("d"), date("Y")+15))); //A partir de 18ans bug et retombe à 1970
             }
             
             UtilisateurManager::updateBannissement($user);

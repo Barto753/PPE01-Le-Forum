@@ -2,7 +2,7 @@
     include_once("include/header.php");
     
     include_once("dataManagers/DiscussionManager.php");
-    include_once("data/Discussion.php");
+    include_once("dataManagers/data/Discussion.php");
     include_once("dataManagers/CategorieManager.php");
     
     date_default_timezone_set('Europe/Paris');
