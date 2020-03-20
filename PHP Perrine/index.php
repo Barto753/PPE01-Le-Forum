@@ -207,8 +207,9 @@
 //AFFICHAGE CATEGORIES
     //$tabCategories = CategorieManager::findAllCategories();
 ?>
+<div class="categorie-titre">Catégories</div>
     <div class="categorie-container">
-        <div class="categorie-titre">Catégories</div>
+        
 <?php
 
     foreach($tabCategories as $categorie)

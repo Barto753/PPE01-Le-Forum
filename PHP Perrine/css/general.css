@@ -140,6 +140,7 @@ img
 {
     color:black;
     font-size: 15px;
+    margin-left: 20px;
 }
 
 .bandeau-bottom img
@@ -200,17 +201,19 @@ img
 .deco-bouton a
 {
     border-radius:12px 0 12px 0;
-    background: #f5f5f5;
+    background-color: white;
     border:none;
     color:#555;
     font: bold 12px Verdana;
     padding:10px;
     box-shadow:1px 1px 3px #999;
+    text-decoration: none;
 }
 
 .deco-bouton
 {
     text-decoration: none;
+    
 }
 
 .inscription-connexion-box
@@ -299,19 +302,23 @@ img
     margin-bottom: 40px;
     padding-bottom : 30px;
     /*border-bottom: 1px solid black;*/
-    justify-content: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    
     align-items: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .categorie-titre
 {
     margin-bottom: 15px;
     padding: 10px;
-    /*border-top: 1px solid black;*/
+    border-top: 1px solid black;
     color: black;
     font-size: 30px;
+    text-align: center;
+    margin-top: 20px;
     
 }
 
@@ -321,13 +328,13 @@ img
     align-items: center;
     display: flex;
     margin-bottom: 15px;
-    padding: 15px;
+    padding: 10px;
     background: #f5f5f5;
     border: 1px solid black;
-    font-size: 25px;
+    font-size: 20px;
     text-decoration: none;
     border-radius: 10px;
-    width:30%;
+    width:70px;
 }
 
 .categorie-nom
