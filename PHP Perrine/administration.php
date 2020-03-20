@@ -35,6 +35,8 @@
                     <th>Pseudo</th>
                     <th>Admin</th>
                     <th>Ban</th>
+                    <th>Motif du ban</th>
+                    <th>Date fin de ban</th>
                 </tr>
 <?php
             foreach ($tabUsers as $user)
@@ -68,6 +70,8 @@
                         }
 ?>
                     </td>
+                    <td> <?php if($user->getMotifBan()!="null"){ echo $user->getMotifBan(); }?> </td>
+                    <td> <?php if($user->getDateFinBan()!="2000-01-01 00:00:00"){ echo $user->getDateFinBan(); }?> </td>
                 </tr>
 <?php
             }

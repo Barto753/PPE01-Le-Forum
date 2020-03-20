@@ -51,10 +51,26 @@
                     <input type="submit" value="Modifier"/>
                 </form>
             </div>
+            
+            <div class="account-verif-mdp">
 <?php
+            
+            if(isset($_GET["verifNewMdp"]))
+            {
+                if($_GET["verifNewMdp"]==1)
+                {
+                    echo "Modification du mot de passe réussie";
+                }
+                else
+                {
+                    echo "Mot de passe actuel erroné, veuillez réessayer";
+                }
+            }
             
             //BOX MODIFIER AVATAR
 ?>
+            </div>
+            
             <div class="account-avatar-modif-container">
                 <form method="POST" action="modifAvatar.php" enctype="multipart/form-data">
                     <label>Modification de l'avatar : </label>

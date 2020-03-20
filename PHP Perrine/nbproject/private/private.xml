@@ -4,11 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/inscription.php</file>
+            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/administration.php</file>
+            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/dataManagers/UtilisateurManager.php</file>
+            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/updateBan.php</file>
             <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/index.php</file>
-            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/include/footer.php</file>
             <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/css/general.css</file>
             <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/sujet.php</file>
-            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/dataManagers/DatabaseLinker.php</file>
+            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/modifPassword.php</file>
+            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/insertDiscu.php</file>
+            <file>file:/C:/UwAmp/www/PPE01-Le-Forum/PHP%20Perrine/account.php</file>
         </group>
     </open-files>
 </project-private>

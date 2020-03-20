@@ -7,39 +7,25 @@
     if(!empty($_POST["idUser"]) && isset($_POST["currentPassword"]) && !empty($_POST["newPassword"]) && !empty($_POST["verifCurrentPassword"]))
     {
         $user = UtilisateurManager::findUserWithId($_POST["idUser"]);
-        
+        $verifModifPassword = 0;
         if($_POST["verifCurrentPassword"]==$_POST["currentPassword"])
         {
             $user->setPassword($_POST["newPassword"]);
             $user = UtilisateurManager::updatePassword($user);
-?>
-            <div class="container-modif-password">
-                <div class="modif-password-text">
-<?php
-            echo "Modification du mot de passe réussie";
-            ?>
-                    </div>
-                <?php
+            $verifModifPassword = 1;
+            //echo "Modification du mot de passe réussie"; 
         }
         else
         {
-?>
-            <div class="modif-password-text">
-<?php
-                
-             echo "Mot de passe actuel erroné, veuillez réessayer.";
-?>
-                </div>
-                <?php
+            $verifModifPassword = 0;
+            //echo "Mot de passe actuel erroné, veuillez réessayer.";
         }
-?>
-<div class="modif-password-text">
-        <a href="account.php">Retour vers le compte</a>
-                
-            </div>
-<?php
-        
+
+       
+        header('Location: account.php?verifNewMdp='.$verifModifPassword);
+        exit;
     }
+        
     
     include_once("include/footer.php");
 ?>
