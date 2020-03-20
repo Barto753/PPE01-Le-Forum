@@ -87,6 +87,7 @@ INSERT INTO Discussion(titreDiscussion, texteDiscussion, dateDiscussion, isClose
 ("Gerbille blessée", "Bonsoir, mon chat a blessé une gerbille à la queue, elle a saigné, que dois je faire...??", "2018-02-18", 0, 3, 4),
 ("Nourrir un perroquet", "Qu'est-ce que les perroquets mangent ?", "2019-05-17", 0, 4, 5),
 ("Pourquoi mon serpent a doublé de volume ?", "Un matin j'ai retrouvé mon boa sur mon canapé et il était très gros..", "2019-02-01", 0, 5, 1),
+("J'adore les chevaux", "Pourquoi mon cheval est vert ?", "2016-04-11", 0, 6, 2), 
 ("Mon poisson rouge a sauté", "Pourquoi mon poisson adore sauter en dehors du bocal ?", "2017-03-11", 0, 7, 3);   
 
 INSERT INTO Message(texteMessage, dateMessage, idUser, idDiscussion) VALUES
