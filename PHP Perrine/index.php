@@ -115,21 +115,27 @@
     {
         //echo "bonjour session login n'est pas defini";
 ?>
-        <div class="inscription-button">
-            <form action="inscription.php">
-                <button type="submit">Inscription</button>
-            </form>
-        </div>
+        <div class="inscription-connexion-box">
+            
+            <div class="button">
+                <!--<form action="inscription.php">
+                    <button type="submit">Inscription</button>
+                </form>-->
+                <a href="inscription.php">Inscription</a>
+            </div>
 
-        <div class="connexion-box">
-            <form method="POST" action="index.php">
-                <label> Pseudo </label>
-                <input type="text" name="pseudo"/>
-                <label> Mot de passe </label>
-                <input type="password" name="password"/>
-                <input type="submit" value="Connexion"/>
-            </form>
+            <div class="connexion-box">
+                <form method="POST" action="index.php">
+                    <label> Pseudo </label>
+                    <input type="text" name="pseudo"/>
+                    <label> Mot de passe </label>
+                    <input type="password" name="password"/>
+                    <input type="submit" value="Connexion"/>
+                </form>
+            </div>
+            
         </div>
+        
 <?php
     }
     $tabCategories = CategorieManager::findAllCategories();
@@ -196,7 +202,6 @@
     {
 ?>
         <div class="categorie-link">
-            <img src="images/folder.png"  alt="icone-dossier-categorie">
             <a class="categorie-nom" href='sujet.php?idCateg=<?php echo $categorie->getIdCategorie(); ?>'> <?php echo $categorie->getNomCategorie()?> </a> 
         </div> 
 <?php

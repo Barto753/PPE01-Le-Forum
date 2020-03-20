@@ -79,9 +79,27 @@
         <div class="discussion-titre"><?php echo $discussion->getTitreDiscussion(); ?></div>
         <div class="discussion-statut"><?php if($discussion->getIsClosed()==0){ echo "Statut : ouvert"; }else if($discussion->getIsClosed()==1){ echo "Statut : fermé";}?></div>
         <div class="discussion-date"><?php echo "Créé le ".$discussion->getDateDiscussion(); ?></div>
-        <div class="discussion-texte"><?php echo $discussion->getTexteDiscussion(); ?></div>
-        <div class="discussion-pseudo"><?php echo "Par ".$user->getPseudo(); ?></div>
-        <img class="discussion-avatar" src="images/<?php echo $user->getCheminAvatar();?>"/>
+        <div class="discussion-user-texte">
+            <div class="discussion-user">
+                <img class="discussion-avatar" src="images/<?php echo $user->getCheminAvatar();?>"/>
+                <div class="discussion-pseudo">
+<?php 
+                    if($currentUser->getIdUser()==$user->getIdUser())
+                    { 
+?>
+                        <a href="account.php"><?php echo $currentUser->getPseudo(); ?></a>
+<?php
+                    }
+                    else
+                    {
+                        echo $user->getPseudo(); 
+                    }
+?>
+                </div>
+            </div>
+            <div class="discussion-texte"><?php echo $discussion->getTexteDiscussion(); ?></div>
+        </div>
+        
         <div class="message-nombre"><?php echo "Messages (".sizeof($tabMessages).")"; ?></div>
 <?php 
         //AFFICHAGE BOX NEW MESSAGE

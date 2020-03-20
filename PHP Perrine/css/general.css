@@ -24,7 +24,7 @@ img
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background: #C9EDD8;
+    background: #DDF8E8;
     padding-bottom: 100px;
     height:100%;
     width: 100%;
@@ -35,7 +35,7 @@ img
     margin-top: 20px;
     width: 850px;
     background: white;
-    padding: 10px;
+    padding: 20px;
     margin-bottom: 20px;
     box-shadow: 3px 3px 10px #525252;
     display: flex;
@@ -60,7 +60,6 @@ img
     width: 100%;
     height: 200px;
     background-color: white;
-    
 }
 
 .entete-link
@@ -88,7 +87,7 @@ img
 {
     width: 100%;
     height: 50px;
-    background: #EDD6C9;
+    background: #F8E9E1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,11 +119,12 @@ img
 {
     width: 100%;
     height:50px;
-    background: #EDD6C9;
+    /*background: #F8E9E1;*/
     display: flex;
     justify-content: flex-start;
     align-items: center;
     font-family: tahoma, sans-serif;
+    border-top: 0.5px solid #B4D8C4;
 }
 
 .bandeau-bottom span
@@ -139,32 +139,56 @@ img
     width: 40px;
     margin-right: 7px;
     margin-left: 7px;
+    
 }
 
-
+.inscription-connexion-box
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #DDEDF8;
+    padding: 20px;
+    margin-top: 10px;
+    border: 0.5px solid black;
+}
 
 .connexion-box
 {
     display: flex;
-    justify-content: flex-end;
-    padding: 10px;
-    margin-bottom: 20px;
-    background: #dfdfff;
-    color: white;
+    /*justify-content: flex-end;*/
+    /*padding: 10px;
+    margin-bottom: 20px;*/
+    
+    color: black;
 }
 
-/*.inscription-box
-{
-    display: flex;
-    justify-content: flex-end;
-    font-weight: bold;
-    font-size: 18px;
-    color: black;
-    margin-bottom: 5px;
-}*/
 
-.inscription-button
+.button
 {
+    
+    border-radius:12px 0 12px 0;
+    background: #f5f5f5;
+    border:none;
+    color:#555;
+    font:bold 12px Verdana;
+    padding:6px 0 6px 0;
+    box-shadow:1px 1px 3px #999;
+}
+
+.button a
+{
+    text-decoration: none;
+    color:#555;
+    padding: 10px;
+}
+
+.button a:hover
+{
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    height: 100%;
     
 }
 
@@ -174,7 +198,8 @@ img
     padding: 10px;
     /*border: 1px solid black;*/
     color: black;
-    font-size: 30px;
+    font-size: 20px;
+    text-decoration: none;
 }
 
 .inscription-box-titre
@@ -192,47 +217,47 @@ img
     margin-bottom: 40px;
     padding-bottom : 30px;
     border-bottom: 1px solid black;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .categorie-titre
 {
     margin-bottom: 15px;
     padding: 10px;
-    border-top: 1px solid black;
+    /*border-top: 1px solid black;*/
     color: black;
     font-size: 30px;
+    
 }
 
 .categorie-link
 {
+    justify-content: center;
+    align-items: center;
+    display: flex;
     margin-bottom: 15px;
     padding: 15px;
-    background-color: #cccccc;
+    background: #f5f5f5;
     border: 1px solid black;
     font-size: 25px;
     text-decoration: none;
+    border-radius: 10px;
+    width:30%;
 }
 
 .categorie-nom
 {
     text-decoration: none;
     color: black;
-}
-
-.categorie-container
-{
-    justify-content: flex-start;
-}
-
-.categorie-container img
-{
-    height: 30px;
-    width: 30px;
+    margin-left: 10px;
 }
 
 .discussion-container
 {
-    margin-top: 10px;
+    margin-top: 15px;
     margin-bottom: 40px;
     padding-bottom : 40px;
     border: 0.5px solid black;
@@ -248,22 +273,70 @@ img
     margin-bottom: 5px;
 }
 
+.discussion-statut
+{
+    margin-bottom: 5px;
+}
+
 .discussion-date
 {
-    margin-bottom: 3px;
+    margin-bottom: 5px;
+}
+
+.discussion-user-texte
+{
+    display: flex;
+    justify-content: flex-start;
+    padding: 15px;
+    border-bottom: 0.5px solid black;
 }
 
 .discussion-texte
 {
-    margin-bottom: 3px;
+    margin: 10px;
     background-color: white;
     padding: 10px;
+    width: 100%;
+    text-align: justify;
 }
-
 
 .discussion-user
 {
-    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px;
+    flex-direction: column;
+}
+
+.discussion-pseudo
+{
+    margin-top: 5px;
+    font-size: 20px;
+    
+}
+
+.discussion-pseudo a
+{
+    text-decoration: none;
+    color: blue;
+    box-shadow:1px 1px 3px #999;
+    background: white;
+    padding: 5px;
+    border-radius: 10px;
+
+}
+
+.discussion-avatar
+{
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+.message-nombre
+{
+    margin-bottom: 5px;
 }
 
 .message-container

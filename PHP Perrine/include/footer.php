@@ -3,9 +3,9 @@
     
     <div class="bandeau-bottom">
         <a class="accueil-link" href="index.php">
-            <img src="images/style-one-pin-home.png" alt="logo-home"/>
+            <img src="images-general/emoji-home.png" alt="logo-home"/>
         </a>
-        <span>Forum réalisé par Quentin Guinta et Perrine Delahay</span>
+        <span>Forum réalisé par Quentin Guinta et Perrine Delahay - mars 2020</span>
     </div>
     
     </body>
